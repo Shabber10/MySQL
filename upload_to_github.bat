@@ -6,7 +6,7 @@ echo Committing changes...
 git commit -m "Auto-upload: Added daily notes and updates"
 
 echo Pushing to GitHub...
-git push
+git push -u origin main
 
 echo.
 echo Upload complete! Press any key to close this window.
