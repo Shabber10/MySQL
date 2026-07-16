@@ -24,6 +24,7 @@ This course is structured chronologically. Each "Day" is contained within its ow
 5. Complete the library system case study walk-through in **[Chapter 7](DAY%201/7.%20Hands-on%20Practice%20Guide.md)**.
 6. Copy, paste, and run statements from the interactive **[practice script](DAY%201/day1_practice_script.sql)** to see them work in real-time.
 7. Test your skills and review top coding questions in **[Chapter 9](DAY%201/9.%20DDL%20Practice%20and%20Interview%20Questions.md)**.
+8. Once completed with Day 1, proceed to **[DAY 2](DAY%202/1.%20Advanced%20Filtering%20with%20WHERE.md)** to learn advanced query filters!
 
 ---
 
@@ -41,7 +42,12 @@ This course is structured chronologically. Each "Day" is contained within its ow
 | | **Case Study: Library Management System** | [7. Hands-on Practice Guide.md](DAY%201/7.%20Hands-on%20Practice%20Guide.md) |
 | | **Memory Shortcuts & Mnemonics** | [8. Memory Shortcuts and Cheatsheet.md](DAY%201/8.%20Memory%20Shortcuts%20and%20Cheatsheet.md) |
 | | **DDL Practice Scenarios & Interview Q&A** | [9. DDL Practice and Interview Questions.md](DAY%201/9.%20DDL%20Practice%20and%20Interview%20Questions.md) |
-| **02** | Advanced Filtering & Sorting (`WHERE`, `LIKE`, `ORDER BY`, `LIMIT`) | *Stay tuned!* |
+| **02** | **Advanced Filtering with WHERE (AND / OR / NOT)** | [1. Advanced Filtering with WHERE.md](DAY%202/1.%20Advanced%20Filtering%20with%20WHERE.md) |
+| | **Range (BETWEEN), List (IN) & Wildcard Matching (LIKE)** | [2. Pattern Matching and Range Operations.md](DAY%202/2.%20Pattern%20Matching%20and%20Range%20Operations.md) |
+| | **Dealing with Missing Data (IS NULL / IS NOT NULL)** | [3. Dealing with Missing Data.md](DAY%202/3.%20Dealing%20with%20Missing%20Data.md) |
+| | **Sorting (ORDER BY) & Restricting Results (LIMIT)** | [4. Sorting and Restricting Results.md](DAY%202/4.%20Sorting%20and%20Restricting%20Results.md) |
+| | **HR Company Database Practice Scenario** | [5. Day 2 Hands-on Practice and Exercises.md](DAY%202/5.%20Day%202%20Hands-on%20Practice%20and%20Exercises.md) |
+| | **Interactive SQL Script** | [day2_practice_script.sql](DAY%202/day2_practice_script.sql) |
 | **03** | Aggregations & Grouping (`COUNT`, `SUM`, `AVG`, `GROUP BY`, `HAVING`) | *Stay tuned!* |
 
 ### Phase 2: Relational Schema & Intermediate Querying
