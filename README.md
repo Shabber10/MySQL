@@ -19,9 +19,11 @@ Welcome to the **Comprehensive MySQL Masterclass**! This repository is designed 
 This course is structured chronologically. Each "Day" is contained within its own directory.
 1. Start with the first chapter of **[DAY 1](DAY%201/1.%20Introduction%20to%20Databases%20and%20MySQL.md)**.
 2. Read the theoretical concepts and try out the command snippets in your own MySQL environment.
-3. Keep the **[Memory Shortcuts and Cheatsheet](DAY%201/7.%20Memory%20Shortcuts%20and%20Cheatsheet.md)** open as a quick reference guide while you learn!
-4. Complete the library system case study walk-through in **[Chapter 6](DAY%201/6.%20Hands-on%20Practice%20Guide.md)**.
-5. Copy, paste, and run statements from the interactive **[practice script](DAY%201/day1_practice_script.sql)** to see them work in real-time.
+3. Learn how to map systems visually using ER diagrams in **[Chapter 2](DAY%201/2.%20Database%20Design%20and%20ER%20Diagrams.md)**.
+4. Keep the **[Memory Shortcuts and Cheatsheet](DAY%201/8.%20Memory%20Shortcuts%20and%20Cheatsheet.md)** open as a quick reference guide while you learn!
+5. Complete the library system case study walk-through in **[Chapter 7](DAY%201/7.%20Hands-on%20Practice%20Guide.md)**.
+6. Copy, paste, and run statements from the interactive **[practice script](DAY%201/day1_practice_script.sql)** to see them work in real-time.
+7. Test your skills and review top coding questions in **[Chapter 9](DAY%201/9.%20DDL%20Practice%20and%20Interview%20Questions.md)**.
 
 ---
 
@@ -30,7 +32,15 @@ This course is structured chronologically. Each "Day" is contained within its ow
 ### Phase 1: MySQL Fundamentals
 | Day | Topic | Start Here |
 | :---: | :--- | :--- |
-| **01** | MySQL Basics, CLI Connection, Data Types, Table Constraints, & Basic CRUD | [1. Introduction to Databases and MySQL.md](DAY%201/1.%20Introduction%20to%20Databases%20and%20MySQL.md) |
+| **01** | **MySQL Basics & Architecture** | [1. Introduction to Databases and MySQL.md](DAY%201/1.%20Introduction%20to%20Databases%20and%20MySQL.md) |
+| | **Database Design & ER Diagrams** | [2. Database Design and ER Diagrams.md](DAY%201/2.%20Database%20Design%20and%20ER%20Diagrams.md) |
+| | **MySQL Installation & Command Line** | [3. MySQL Installation and Command Line.md](DAY%201/3.%20MySQL%20Installation%20and%20Command%20Line.md) |
+| | **Data Types (Exact/Approx Numeric, String, Binary, DateTime)** | [4. Data Types in MySQL.md](DAY%201/4.%20Data%20Types%20in%20MySQL.md) |
+| | **Creating Databases, Tables, & Constraints (DDL)** | [5. Creating Databases and Tables.md](DAY%201/5.%20Creating%20Databases%20and%20Tables.md) |
+| | **Basic CRUD Operations (DML / DQL)** | [6. Basic CRUD Operations.md](DAY%201/6.%20Basic%20CRUD%20Operations.md) |
+| | **Case Study: Library Management System** | [7. Hands-on Practice Guide.md](DAY%201/7.%20Hands-on%20Practice%20Guide.md) |
+| | **Memory Shortcuts & Mnemonics** | [8. Memory Shortcuts and Cheatsheet.md](DAY%201/8.%20Memory%20Shortcuts%20and%20Cheatsheet.md) |
+| | **DDL Practice Scenarios & Interview Q&A** | [9. DDL Practice and Interview Questions.md](DAY%201/9.%20DDL%20Practice%20and%20Interview%20Questions.md) |
 | **02** | Advanced Filtering & Sorting (`WHERE`, `LIKE`, `ORDER BY`, `LIMIT`) | *Stay tuned!* |
 | **03** | Aggregations & Grouping (`COUNT`, `SUM`, `AVG`, `GROUP BY`, `HAVING`) | *Stay tuned!* |
 
