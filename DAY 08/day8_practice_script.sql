@@ -1,0 +1,1 @@
+-- DAY 08: practice script template
