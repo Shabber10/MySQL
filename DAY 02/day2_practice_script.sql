@@ -126,3 +126,57 @@ SELECT first_name, join_date
 FROM employees
 ORDER BY join_date ASC
 LIMIT 1;
+
+
+-- ----------------------------------------------------
+-- 9. LOGICAL NEGATION SCENARIO (students TABLE)
+-- ----------------------------------------------------
+CREATE TABLE IF NOT EXISTS students (
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+    age INT,
+    marks INT,
+    city VARCHAR(50)
+);
+
+-- Clean up any old data
+TRUNCATE TABLE students;
+
+INSERT INTO students VALUES
+(1, 'Amit', 18, 85, 'Delhi'),
+(2, 'Sara', 19, 72, 'Mumbai'),
+(3, 'John', 18, 90, 'Delhi'),
+(4, 'Ravi', 20, 60, 'Chennai'),
+(5, 'Meena', 21, 50, 'Hyderabad');
+
+-- Q1. Display students who are NOT from Delhi
+SELECT name, city FROM students WHERE NOT city = 'Delhi';
+
+-- Q2. Display students who are NOT IN Delhi and Mumbai
+SELECT name, city FROM students WHERE city NOT IN ('Delhi', 'Mumbai');
+
+-- Q3. Display students whose names DO NOT start with 'A'
+SELECT name FROM students WHERE name NOT LIKE 'A%';
+
+-- Q4. Display students whose names DO NOT end with 'a'
+SELECT name FROM students WHERE name NOT LIKE '%a';
+
+-- Q5. Display students whose marks are NOT greater than 70
+SELECT name, marks FROM students WHERE NOT marks > 70;
+
+-- Q6. Display students whose marks are NOT BETWEEN 60 and 90
+SELECT name, marks FROM students WHERE marks NOT BETWEEN 60 AND 90;
+
+-- Q7. Display students whose age is NOT between 18 and 20
+SELECT name, age FROM students WHERE age NOT BETWEEN 18 AND 20;
+
+-- Q8. Display students who are NOT from Chennai AND NOT from Delhi
+SELECT name, city FROM students WHERE city NOT IN ('Chennai', 'Delhi');
+
+-- Q9. Display students whose names do not contain the letter 'o'
+SELECT name FROM students WHERE name NOT LIKE '%o%';
+
+-- Q10. Display students who are NOT from Delhi AND marks NOT above 80
+SELECT name, marks, city
+FROM students
+WHERE NOT city = 'Delhi' AND NOT marks > 80;
