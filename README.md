@@ -58,7 +58,7 @@ This course is structured chronologically. Each "Day" is contained within its ow
 ### Phase 2: Relational Schema & Intermediate Querying
 | Day | Topic | Status |
 | :---: | :--- | :--- |
-| **04** | [Table Joins (`INNER`, `LEFT`, `RIGHT`, `SELF` Joins)](DAY%2004/README.md) | Completed |
+| **04** | [Table Joins (Inner, Left, Right, Full, Self, Cross, Equi, Non-Equi, Natural Joins & Performance)](DAY%2004/README.md) | Completed |
 | **05** | [Subqueries & CTEs (`WITH` clauses)](DAY%2005/README.md) | *Stay tuned!* |
 
 ### Phase 3: Schema Design & Database Control
