@@ -193,6 +193,23 @@ SELECT s.size, c.color
 FROM Sizes s
 CROSS JOIN Colors c;
 
+-- C. CROSS JOIN (Cartesian Product of students & subjects)
+DROP TABLE IF EXISTS Students_Cross;
+CREATE TABLE Students_Cross (
+    sname VARCHAR(50)
+);
+INSERT INTO Students_Cross VALUES ('Rahul'), ('Priya');
+
+DROP TABLE IF EXISTS Subjects_Cross;
+CREATE TABLE Subjects_Cross (
+    subname VARCHAR(50)
+);
+INSERT INTO Subjects_Cross VALUES ('Math'), ('Science'), ('English');
+
+SELECT s.sname, sub.subname
+FROM Students_Cross s
+CROSS JOIN Subjects_Cross sub;
+
 
 -- ---------------------------------------------------------------------
 -- 6. Chapter 6: Join Optimization and Performance

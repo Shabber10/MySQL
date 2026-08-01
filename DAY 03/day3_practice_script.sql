@@ -194,7 +194,7 @@ SELECT VERSION() AS mysql_version;
 -- 9. Advanced & Conditional Control Flow Functions
 -- ---------------------------------------------------------------------
 
--- CASE WHEN Demo
+-- CASE WHEN Demo 1 (Sales)
 SELECT id, customer_name, price,
    CASE 
      WHEN price > 50000 THEN 'High Price'
@@ -202,6 +202,28 @@ SELECT id, customer_name, price,
      ELSE 'Low Price'
    END AS price_level
 FROM Sales;
+
+-- CASE WHEN Demo 2 (Products Table from user notes)
+DROP TABLE IF EXISTS products;
+CREATE TABLE products (
+    pname VARCHAR(50),
+    pprice DECIMAL(10,2)
+);
+INSERT INTO products VALUES 
+('mobile', 10000.90),
+('watch', 12001.00),
+('buds', NULL),
+('bike', 78787.99),
+('bike', 78787.99),
+('bike', NULL);
+
+SELECT pname, pprice,
+   CASE 
+     WHEN pprice > 50000 THEN 'high' 
+     WHEN pprice > 11000 THEN 'medium' 
+     ELSE 'low' 
+   END AS level_salaries 
+FROM products;
 
 -- IF Ternary Demo
 SELECT IF(10 > 5, 'Yes', 'No') AS ternary_if;
