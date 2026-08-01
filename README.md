@@ -59,19 +59,19 @@ This course is structured chronologically. Each "Day" is contained within its ow
 | Day | Topic | Status |
 | :---: | :--- | :--- |
 | **04** | [Table Joins (Inner, Left, Right, Full, Self, Cross, Equi, Non-Equi, Natural Joins & Performance)](DAY%2004/README.md) | Completed |
-| **05** | [Subqueries & CTEs (`WITH` clauses)](DAY%2005/README.md) | *Stay tuned!* |
+| **05** | [Subqueries & CTEs (`WITH` clauses)](DAY%2005/README.md) | Completed |
 
 ### Phase 3: Schema Design & Database Control
 | Day | Topic | Status |
 | :---: | :--- | :--- |
-| **06** | [Database Normalization & Keys (1NF, 2NF, 3NF design principles)](DAY%2006/README.md) | *Stay tuned!* |
-| **07** | [Altering Tables & Constraints (`ALTER TABLE`)](DAY%2007/README.md) | *Stay tuned!* |
-| **08** | [Transactions & Concurrency (ACID properties, `COMMIT`, `ROLLBACK`)](DAY%2008/README.md) | *Stay tuned!* |
+| **06** | [Database Normalization & Keys (1NF, 2NF, 3NF design principles)](DAY%2006/README.md) | Completed |
+| **07** | [Altering Tables & Constraints (`ALTER TABLE`)](DAY%2007/README.md) | Completed |
+| **08** | [Transactions & Concurrency (ACID properties, `COMMIT`, `ROLLBACK`)](DAY%2008/README.md) | Completed |
 
 ### Phase 4: Stored Programs & Programmability
 | Day | Topic | Status |
 | :---: | :--- | :--- |
-| **09** | [Indexes & Views (Search speeds, composite indexes)](DAY%2009/README.md) | *Stay tuned!* |
+| **09** | [Indexes & Views (Search speeds, composite indexes)](DAY%2009/README.md) | Views Completed |
 | **10** | [Stored Procedures & Functions (Variables, logic loops)](DAY%2010/README.md) | *Stay tuned!* |
 | **11** | [Triggers & Events (`BEFORE`/`AFTER` automation, scheduled jobs)](DAY%2011/README.md) | *Stay tuned!* |
 

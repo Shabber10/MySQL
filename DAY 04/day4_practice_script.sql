@@ -229,3 +229,138 @@ INNER JOIN Products p ON od.product_id = p.product_id;
 SELECT c1.name AS customer_1, c2.name AS customer_2, c1.city
 FROM Customers c1
 INNER JOIN Customers c2 ON c1.city = c2.city AND c1.customer_id < c2.customer_id;
+
+
+-- ---------------------------------------------------------------------
+-- 8. Practice Exercises: Non-Equi Joins
+-- ---------------------------------------------------------------------
+
+-- Create practice tables
+DROP TABLE IF EXISTS Employees_HR;
+CREATE TABLE Employees_HR (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    salary INT
+);
+
+DROP TABLE IF EXISTS Salary_Grades;
+CREATE TABLE Salary_Grades (
+    grade CHAR(1),
+    min_sal INT,
+    max_sal INT
+);
+
+-- Ingest data
+INSERT INTO Employees_HR VALUES
+(1, 'John', 5000),
+(2, 'Alice', 12000),
+(3, 'Bob', 20000),
+(4, 'David', 35000);
+
+INSERT INTO Salary_Grades VALUES
+('A', 0, 10000),
+('B', 10001, 20000),
+('C', 20001, 40000);
+
+-- Q1. Find the salary grade of each employee.
+SELECT e.emp_name, e.salary, s.grade
+FROM Employees_HR e
+JOIN Salary_Grades s ON e.salary BETWEEN s.min_sal AND s.max_sal;
+
+-- Q2. List employees who fall under grade 'B'.
+SELECT e.emp_name, e.salary
+FROM Employees_HR e
+JOIN Salary_Grades s ON e.salary BETWEEN s.min_sal AND s.max_sal
+WHERE s.grade = 'B';
+
+-- Q3. Show employees whose salary is less than the minimum salary of grade 'B'.
+SELECT e.emp_name, e.salary
+FROM Employees_HR e
+JOIN Salary_Grades s ON e.salary < s.min_sal
+WHERE s.grade = 'B';
+
+-- Q4. Find employees whose salary is greater than the maximum salary of grade 'A'.
+SELECT e.emp_name, e.salary
+FROM Employees_HR e
+JOIN Salary_Grades s ON e.salary > s.max_sal
+WHERE s.grade = 'A';
+
+-- Q5. Display all grades and the employees in each grade (if any).
+SELECT s.grade, e.emp_name, e.salary
+FROM Salary_Grades s
+LEFT JOIN Employees_HR e ON e.salary BETWEEN s.min_sal AND s.max_sal;
+
+-- Q6. Find employees who are in the highest salary grade.
+SELECT e.emp_name, e.salary, s.grade
+FROM Employees_HR e
+JOIN Salary_Grades s ON e.salary BETWEEN s.min_sal AND s.max_sal
+WHERE s.grade = (SELECT MAX(grade) FROM Salary_Grades);
+
+
+-- ---------------------------------------------------------------------
+-- 9. Practice Exercises: Self Joins
+-- ---------------------------------------------------------------------
+
+-- Create Org table
+DROP TABLE IF EXISTS Employees_Org;
+CREATE TABLE Employees_Org (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    manager_id INT,
+    FOREIGN KEY (manager_id) REFERENCES Employees_Org(emp_id)
+);
+
+-- Ingest Org data
+INSERT INTO Employees_Org VALUES
+(1, 'John', NULL),
+(2, 'Alice', 1),
+(3, 'Bob', 1),
+(4, 'David', 2),
+(5, 'Emma', 2);
+
+-- Q1. Find each employee along with their manager's name.
+SELECT e.emp_name AS Employee, m.emp_name AS Manager
+FROM Employees_Org e
+LEFT JOIN Employees_Org m ON e.manager_id = m.emp_id;
+
+-- Q2. Find employees who report directly to John.
+SELECT e.emp_name
+FROM Employees_Org e
+JOIN Employees_Org m ON e.manager_id = m.emp_id
+WHERE m.emp_name = 'John';
+
+-- Q3. List employees who don't have any manager (top-level bosses).
+SELECT emp_name
+FROM Employees_Org
+WHERE manager_id IS NULL;
+
+-- Q4. Find all managers who have at least one employee reporting to them.
+SELECT DISTINCT m.emp_name AS Manager
+FROM Employees_Org e
+JOIN Employees_Org m ON e.manager_id = m.emp_id;
+
+-- Q5. Find employees who share the same manager.
+SELECT e1.emp_name AS Employee1, e2.emp_name AS Employee2, m.emp_name AS Manager
+FROM Employees_Org e1
+JOIN Employees_Org e2 ON e1.manager_id = e2.manager_id AND e1.emp_id < e2.emp_id
+JOIN Employees_Org m ON e1.manager_id = m.emp_id;
+
+-- Q6. Show all employees with their manager and manager's manager (grand boss).
+SELECT e.emp_name AS Employee,
+       m.emp_name AS Manager,
+       gm.emp_name AS Grand_Manager
+FROM Employees_Org e
+LEFT JOIN Employees_Org m ON e.manager_id = m.emp_id
+LEFT JOIN Employees_Org gm ON m.manager_id = gm.emp_id;
+
+-- Q7. Find pairs of employees where one is the manager of the other.
+SELECT e.emp_name AS Employee, m.emp_name AS Manager
+FROM Employees_Org e
+JOIN Employees_Org m ON e.manager_id = m.emp_id;
+
+-- Q8. Find employees who are managers but also report to someone else.
+SELECT DISTINCT e.emp_name
+FROM Employees_Org e
+WHERE e.emp_id IN (SELECT DISTINCT manager_id FROM Employees_Org)
+  AND e.manager_id IS NOT NULL;
+

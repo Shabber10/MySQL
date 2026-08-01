@@ -153,7 +153,7 @@ SELECT * FROM Sales ORDER BY RAND() LIMIT 1;
 
 
 -- ---------------------------------------------------------------------
--- 7. String Functions
+-- 7. String Functions (Extended)
 -- ---------------------------------------------------------------------
 
 -- Concatenation
@@ -170,5 +170,121 @@ SELECT LEFT('Masterclass', 6) AS left_slice, RIGHT('Masterclass', 5) AS right_sl
 
 -- Find and Replace
 SELECT REPLACE('I love SQL Server', 'SQL Server', 'MySQL') AS replaced;
-SELECT INSTR('MySQL', 'SQL') AS index_position;
-SELECT TRIM('  hello  ') AS trimmed;
+SELECT INSTR('MySQL', 'SQL') AS index_position_instr;
+SELECT LOCATE('SQL', 'MySQL Database') AS index_position_locate;
+SELECT TRIM('  hello  ') AS trimmed, LTRIM('  hi') AS ltrimmed, RTRIM('bye  ') AS rtrimmed;
+
+-- Extended String Functions
+SELECT ASCII('A') AS ascii_val, ORD('A') AS ord_val;
+SELECT FORMAT(12345.6789, 2) AS formatted_num;
+SELECT REPEAT('SQL', 3) AS repeated_str, REVERSE('MySQL') AS reversed_str;
+SELECT CONCAT('My', SPACE(3), 'SQL') AS spaced_str;
+SELECT INSERT('Database', 2, 3, 'XX') AS inserted_str;
+
+
+-- ---------------------------------------------------------------------
+-- 8. System Information Functions
+-- ---------------------------------------------------------------------
+SELECT DATABASE() AS current_db;
+SELECT USER() AS current_user;
+SELECT VERSION() AS mysql_version;
+
+
+-- ---------------------------------------------------------------------
+-- 9. Advanced & Conditional Control Flow Functions
+-- ---------------------------------------------------------------------
+
+-- CASE WHEN Demo
+SELECT id, customer_name, price,
+   CASE 
+     WHEN price > 50000 THEN 'High Price'
+     WHEN price > 15000 THEN 'Medium Price'
+     ELSE 'Low Price'
+   END AS price_level
+FROM Sales;
+
+-- IF Ternary Demo
+SELECT IF(10 > 5, 'Yes', 'No') AS ternary_if;
+
+-- IFNULL and ISNULL Demo
+SELECT IFNULL(NULL, 'Default Value') AS if_null_demo;
+SELECT ISNULL(NULL) AS is_null_true, ISNULL('abc') AS is_null_false;
+
+-- COALESCE Demo
+SELECT COALESCE(NULL, NULL, 'First Non-Null', 'Fallback') AS coalesce_demo;
+
+-- NULLIF Demo
+SELECT NULLIF(10, 10) AS equal_null, NULLIF(10, 20) AS unequal_first;
+
+-- CAST Demo
+SELECT CAST('123' AS UNSIGNED) AS cast_unsigned;
+
+-- BIN and BINARY Demo
+SELECT BIN(10) AS binary_string;
+SELECT 'abc' = BINARY 'ABC' AS case_sensitive_match, 'abc' = 'ABC' AS default_match;
+
+
+-- ---------------------------------------------------------------------
+-- 10. String and Advanced Functions Exercises (Q1 - Q20)
+-- ---------------------------------------------------------------------
+
+-- Q1. display 'hello world' in uppercase.
+SELECT UPPER('hello world') AS Q1_result;
+
+-- Q2. convert 'MYSQL Functions' into lowercase.
+SELECT LOWER('MYSQL Functions') AS Q2_result;
+
+-- Q3. find length of 'Database'.
+SELECT LENGTH('Database') AS Q3_result;
+
+-- Q4. find character length of 'My SQL'.
+SELECT CHAR_LENGTH('My SQL') AS Q4_result;
+
+-- Q5. Concatenate 'My' and 'SQL'.
+SELECT CONCAT('My', 'SQL') AS Q5_result;
+
+-- Q6. Combine 'John' and 'Doe' with a space.
+SELECT CONCAT('John', ' ', 'Doe') AS Q6_full_name;
+
+-- Q7. Extract first 4 characters from 'Database'.
+SELECT SUBSTRING('Database', 1, 4) AS Q7_result;
+
+-- Q8. Extract characters from position 3 to 6 from 'Functions'.
+SELECT SUBSTRING('Functions', 3, 4) AS Q8_result;
+
+-- Q9. Remove spaces from both sides of ' SQL '.
+SELECT TRIM(' SQL ') AS Q9_result;
+
+-- Q10. Remove only left-side spaces from ' MySQL'.
+SELECT LTRIM(' MySQL') AS Q10_result;
+
+-- Q11. Remove only right-side spaces from 'Hello '.
+SELECT RTRIM('Hello ') AS Q11_result;
+
+-- Q12. Replace 'Java' with 'SQL' in 'I like Java'.
+SELECT REPLACE('I like Java', 'Java', 'SQL') AS Q12_result;
+
+-- Q13. Change 'Good Morning' into 'Good Evening'.
+SELECT REPLACE('Good Morning', 'Morning', 'Evening') AS Q13_result;
+
+-- Q14. Insert 'XX' into 'Database' starting from position 2, replacing 3 characters.
+SELECT INSERT('Database', 2, 3, 'XX') AS Q14_result;
+
+-- Q15. Replace 2 characters from position 4 in 'Learning' with 'SQL'.
+SELECT INSERT('Learning', 4, 2, 'SQL') AS Q15_result;
+
+-- Q16. Reverse the string 'MySQL'.
+SELECT REVERSE('MySQL') AS Q16_result;
+
+-- Q17. Repeat the string 'Raju' 3 times.
+SELECT REPEAT('Raju', 3) AS Q17_result;
+
+-- Q18. Find position of 'SQL' in 'I am learning SQL'.
+SELECT LOCATE('SQL', 'I am learning SQL') AS Q18_result;
+
+-- Q19. Find position of 'a' in 'Database'.
+SELECT INSTR('Database', 'a') AS Q19_result;
+
+-- Q20. Force case-sensitive comparison of 'abc' and 'ABC'.
+SELECT 'abc' = BINARY 'ABC' AS Q20_match;
+
