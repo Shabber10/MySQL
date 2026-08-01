@@ -71,7 +71,7 @@ This course is structured chronologically. Each "Day" is contained within its ow
 ### Phase 4: Stored Programs & Programmability
 | Day | Topic | Status |
 | :---: | :--- | :--- |
-| **09** | [Indexes & Views (Search speeds, composite indexes)](DAY%2009/README.md) | Views Completed |
+| **09** | [Indexes & Views (Search speeds, composite indexes)](DAY%2009/README.md) | Completed |
 | **10** | [Stored Procedures & Functions (Variables, logic loops)](DAY%2010/README.md) | *Stay tuned!* |
 | **11** | [Triggers & Events (`BEFORE`/`AFTER` automation, scheduled jobs)](DAY%2011/README.md) | *Stay tuned!* |
 
