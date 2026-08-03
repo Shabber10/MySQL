@@ -17,14 +17,14 @@ Welcome to the **Comprehensive MySQL Masterclass**! This repository is designed 
 
 ### How to Use This Repository
 This course is structured chronologically. Each "Day" is contained within its own directory.
-1. Start with the first chapter of **[DAY 01](DAY%2001/1.%20Introduction%20to%20Databases%20and%20MySQL.md)**.
+1. Start with the first chapter of **[DAY 01](DAY%2001%20-%20Introduction%20to%20Databases%20and%20MySQL/1.%20Introduction%20to%20Databases%20and%20MySQL.md)**.
 2. Read the theoretical concepts and try out the command snippets in your own MySQL environment.
-3. Learn how to map systems visually using ER diagrams in **[Chapter 2](DAY%2001/2.%20Database%20Design%20and%20ER%20Diagrams.md)**.
-4. Keep the **[Memory Shortcuts and Cheatsheet](DAY%2001/8.%20Memory%20Shortcuts%20and%20Cheatsheet.md)** open as a quick reference guide while you learn!
-5. Complete the library system case study walk-through in **[Chapter 7](DAY%2001/7.%20Hands-on%20Practice%20Guide.md)**.
-6. Copy, paste, and run statements from the interactive **[practice script](DAY%2001/day1_practice_script.sql)** to see them work in real-time.
-7. Test your skills and review top coding questions in **[Chapter 9](DAY%2001/9.%20DDL%20Practice%20and%20Interview%20Questions.md)**.
-8. Once completed with Day 01, proceed to **[DAY 02](DAY%2002/1.%20Advanced%20Filtering%20with%20WHERE.md)** to learn advanced query filters!
+3. Learn how to map systems visually using ER diagrams in **[Chapter 2](DAY%2001%20-%20Introduction%20to%20Databases%20and%20MySQL/2.%20Database%20Design%20and%20ER%20Diagrams.md)**.
+4. Keep the **[Memory Shortcuts and Cheatsheet](DAY%2001%20-%20Introduction%20to%20Databases%20and%20MySQL/8.%20Memory%20Shortcuts%20and%20Cheatsheet.md)** open as a quick reference guide while you learn!
+5. Complete the library system case study walk-through in **[Chapter 7](DAY%2001%20-%20Introduction%20to%20Databases%20and%20MySQL/7.%20Hands-on%20Practice%20Guide.md)**.
+6. Copy, paste, and run statements from the interactive **[practice script](DAY%2001%20-%20Introduction%20to%20Databases%20and%20MySQL/day1_practice_script.sql)** to see them work in real-time.
+7. Test your skills and review top coding questions in **[Chapter 9](DAY%2001%20-%20Introduction%20to%20Databases%20and%20MySQL/9.%20DDL%20Practice%20and%20Interview%20Questions.md)**.
+8. Once completed with Day 01, proceed to **[DAY 02](DAY%2002%20-%20Advanced%20Filtering%20with%20WHERE/1.%20Advanced%20Filtering%20with%20WHERE.md)** to learn advanced query filters!
 
 ---
 
@@ -33,54 +33,54 @@ This course is structured chronologically. Each "Day" is contained within its ow
 ### Phase 1: MySQL Fundamentals
 | Day | Topic | Start Here |
 | :---: | :--- | :--- |
-| **01** | **MySQL Basics & Architecture** | [1. Introduction to Databases and MySQL.md](DAY%2001/1.%20Introduction%20to%20Databases%20and%20MySQL.md) |
-| | **Database Design & ER Diagrams** | [2. Database Design and ER Diagrams.md](DAY%2001/2.%20Database%20Design%20and%20ER%20Diagrams.md) |
-| | **MySQL Installation & Command Line** | [3. MySQL Installation and Command Line.md](DAY%2001/3.%20MySQL%20Installation%20and%20Command%20Line.md) |
-| | **Data Types (Exact/Approx Numeric, String, Binary, DateTime)** | [4. Data Types in MySQL.md](DAY%2001/4.%20Data%20Types%20in%20MySQL.md) |
-| | **Creating Databases, Tables, & Constraints (DDL)** | [5. Creating Databases and Tables.md](DAY%2001/5.%20Creating%20Databases%20and%20Tables.md) |
-| | **Basic CRUD Operations (DML / DQL)** | [6. Basic CRUD Operations.md](DAY%2001/6.%20Basic%20CRUD%20Operations.md) |
-| | **Case Study: Library Management System** | [7. Hands-on Practice Guide.md](DAY%2001/7.%20Hands-on%20Practice%20Guide.md) |
-| | **Memory Shortcuts & Mnemonics** | [8. Memory Shortcuts and Cheatsheet.md](DAY%2001/8.%20Memory%20Shortcuts%20and%20Cheatsheet.md) |
-| | **DDL Practice Scenarios & Interview Q&A** | [9. DDL Practice and Interview Questions.md](DAY%2001/9.%20DDL%20Practice%20and%20Interview%20Questions.md) |
-| **02** | **Advanced Filtering with WHERE (AND / OR / NOT)** | [1. Advanced Filtering with WHERE.md](DAY%2002/1.%20Advanced%20Filtering%20with%20WHERE.md) |
-| | **Range (BETWEEN), List (IN) & Wildcard Matching (LIKE)** | [2. Pattern Matching and Range Operations.md](DAY%2002/2.%20Pattern%20Matching%20and%20Range%20Operations.md) |
-| | **Dealing with Missing Data (IS NULL / IS NOT NULL)** | [3. Dealing with Missing Data.md](DAY%2002/3.%20Dealing%20with%20Missing%20Data.md) |
-| | **Sorting (ORDER BY) & Restricting Results (LIMIT)** | [4. Sorting and Restricting Results.md](DAY%2002/4.%20Sorting%20and%20Restricting%20Results.md) |
-| | **HR Company Database Practice Scenario** | [5. Day 02 Hands-on Practice and Exercises.md](DAY%2002/5.%20Day%202%20Hands-on%20Practice%20and%20Exercises.md) |
-| | **Interactive SQL Script** | [day2_practice_script.sql](DAY%2002/day2_practice_script.sql) |
-| **03** | **Aggregations & Grouping (COUNT, SUM, AVG, MIN, MAX)** | [1. Introduction to Aggregations.md](DAY%2003/1.%20Introduction%20to%20Aggregations.md) |
-| | **Grouping Data with GROUP BY** | [2. Grouping Data with GROUP BY.md](DAY%2003/2.%20Grouping%20Data%20with%20GROUP%20BY.md) |
-| | **Filtering Groups with HAVING** | [3. Filtering Groups with HAVING.md](DAY%2003/3.%20Filtering%20Groups%20with%20HAVING.md) |
-| | **Built-in Math & String Functions** | [4. Built-in Math and String Functions.md](DAY%2003/4.%20Built-in%20Math%20and%20String%20Functions.md) |
-| | **Practice Scenario & Exercises** | [5. Day 03 Practice Scenario and Exercises.md](DAY%2003/5.%20Day%203%20Practice%20Scenario%20and%20Exercises.md) |
-| | **Interactive SQL Script** | [day3_practice_script.sql](DAY%2003/day3_practice_script.sql) |
+| **01** | **MySQL Basics & Architecture** | [1. Introduction to Databases and MySQL.md](DAY%2001%20-%20Introduction%20to%20Databases%20and%20MySQL/1.%20Introduction%20to%20Databases%20and%20MySQL.md) |
+| | **Database Design & ER Diagrams** | [2. Database Design and ER Diagrams.md](DAY%2001%20-%20Introduction%20to%20Databases%20and%20MySQL/2.%20Database%20Design%20and%20ER%20Diagrams.md) |
+| | **MySQL Installation & Command Line** | [3. MySQL Installation and Command Line.md](DAY%2001%20-%20Introduction%20to%20Databases%20and%20MySQL/3.%20MySQL%20Installation%20and%20Command%20Line.md) |
+| | **Data Types (Exact/Approx Numeric, String, Binary, DateTime)** | [4. Data Types in MySQL.md](DAY%2001%20-%20Introduction%20to%20Databases%20and%20MySQL/4.%20Data%20Types%20in%20MySQL.md) |
+| | **Creating Databases, Tables, & Constraints (DDL)** | [5. Creating Databases and Tables.md](DAY%2001%20-%20Introduction%20to%20Databases%20and%20MySQL/5.%20Creating%20Databases%20and%20Tables.md) |
+| | **Basic CRUD Operations (DML / DQL)** | [6. Basic CRUD Operations.md](DAY%2001%20-%20Introduction%20to%20Databases%20and%20MySQL/6.%20Basic%20CRUD%20Operations.md) |
+| | **Case Study: Library Management System** | [7. Hands-on Practice Guide.md](DAY%2001%20-%20Introduction%20to%20Databases%20and%20MySQL/7.%20Hands-on%20Practice%20Guide.md) |
+| | **Memory Shortcuts & Mnemonics** | [8. Memory Shortcuts and Cheatsheet.md](DAY%2001%20-%20Introduction%20to%20Databases%20and%20MySQL/8.%20Memory%20Shortcuts%20and%20Cheatsheet.md) |
+| | **DDL Practice Scenarios & Interview Q&A** | [9. DDL Practice and Interview Questions.md](DAY%2001%20-%20Introduction%20to%20Databases%20and%20MySQL/9.%20DDL%20Practice%20and%20Interview%20Questions.md) |
+| **02** | **Advanced Filtering with WHERE (AND / OR / NOT)** | [1. Advanced Filtering with WHERE.md](DAY%2002%20-%20Advanced%20Filtering%20with%20WHERE/1.%20Advanced%20Filtering%20with%20WHERE.md) |
+| | **Range (BETWEEN), List (IN) & Wildcard Matching (LIKE)** | [2. Pattern Matching and Range Operations.md](DAY%2002%20-%20Advanced%20Filtering%20with%20WHERE/2.%20Pattern%20Matching%20and%20Range%20Operations.md) |
+| | **Dealing with Missing Data (IS NULL / IS NOT NULL)** | [3. Dealing with Missing Data.md](DAY%2002%20-%20Advanced%20Filtering%20with%20WHERE/3.%20Dealing%20with%20Missing%20Data.md) |
+| | **Sorting (ORDER BY) & Restricting Results (LIMIT)** | [4. Sorting and Restricting Results.md](DAY%2002%20-%20Advanced%20Filtering%20with%20WHERE/4.%20Sorting%20and%20Restricting%20Results.md) |
+| | **HR Company Database Practice Scenario** | [5. Day 02 Hands-on Practice and Exercises.md](DAY%2002%20-%20Advanced%20Filtering%20with%20WHERE/5.%20Day%202%20Hands-on%20Practice%20and%20Exercises.md) |
+| | **Interactive SQL Script** | [day2_practice_script.sql](DAY%2002%20-%20Advanced%20Filtering%20with%20WHERE/day2_practice_script.sql) |
+| **03** | **Aggregations & Grouping (COUNT, SUM, AVG, MIN, MAX)** | [1. Introduction to Aggregations.md](DAY%2003%20-%20Aggregations%20and%20Grouping/1.%20Introduction%20to%20Aggregations.md) |
+| | **Grouping Data with GROUP BY** | [2. Grouping Data with GROUP BY.md](DAY%2003%20-%20Aggregations%20and%20Grouping/2.%20Grouping%20Data%20with%20GROUP%20BY.md) |
+| | **Filtering Groups with HAVING** | [3. Filtering Groups with HAVING.md](DAY%2003%20-%20Aggregations%20and%20Grouping/3.%20Filtering%20Groups%20with%20HAVING.md) |
+| | **Built-in Math & String Functions** | [4. Built-in Math and String Functions.md](DAY%2003%20-%20Aggregations%20and%20Grouping/4.%20Built-in%20Math%20and%20String%20Functions.md) |
+| | **Practice Scenario & Exercises** | [5. Day 03 Practice Scenario and Exercises.md](DAY%2003%20-%20Aggregations%20and%20Grouping/5.%20Day%203%20Practice%20Scenario%20and%20Exercises.md) |
+| | **Interactive SQL Script** | [day3_practice_script.sql](DAY%2003%20-%20Aggregations%20and%20Grouping/day3_practice_script.sql) |
 
 ### Phase 2: Relational Schema & Intermediate Querying
 | Day | Topic | Status |
 | :---: | :--- | :--- |
-| **04** | [Table Joins (Inner, Left, Right, Full, Self, Cross, Equi, Non-Equi, Natural Joins & Performance)](DAY%2004/README.md) | Completed |
-| **05** | [Subqueries & CTEs (`WITH` clauses)](DAY%2005/README.md) | Completed |
+| **04** | [Table Joins (Inner, Left, Right, Full, Self, Cross, Equi, Non-Equi, Natural Joins & Performance)](DAY%2004%20-%20Table%20Joins/README.md) | Completed |
+| **05** | [Subqueries & CTEs (`WITH` clauses)](DAY%2005%20-%20Subqueries%2C%20Set%20Operators%20and%20CTEs/README.md) | Completed |
 
 ### Phase 3: Schema Design & Database Control
 | Day | Topic | Status |
 | :---: | :--- | :--- |
-| **06** | [Database Normalization & Keys (1NF, 2NF, 3NF design principles)](DAY%2006/README.md) | Completed |
-| **07** | [Altering Tables & Constraints (`ALTER TABLE`)](DAY%2007/README.md) | Completed |
-| **08** | [Transactions & Concurrency (ACID properties, `COMMIT`, `ROLLBACK`)](DAY%2008/README.md) | Completed |
+| **06** | [Database Normalization & Keys (1NF, 2NF, 3NF design principles)](DAY%2006%20-%20Database%20Normalization%20and%20Keys/README.md) | Completed |
+| **07** | [Altering Tables & Constraints (`ALTER TABLE`)](DAY%2007%20-%20Altering%20Tables%20and%20Constraints/README.md) | Completed |
+| **08** | [Transactions & Concurrency (ACID properties, `COMMIT`, `ROLLBACK`)](DAY%2008%20-%20Transactions%20and%20Concurrency/README.md) | Completed |
 
 ### Phase 4: Stored Programs & Programmability
 | Day | Topic | Status |
 | :---: | :--- | :--- |
-| **09** | [Indexes & Views (Search speeds, composite indexes)](DAY%2009/README.md) | Completed |
-| **10** | [Stored Procedures & Functions (Variables, logic loops)](DAY%2010/README.md) | *Stay tuned!* |
-| **11** | [Triggers & Events (`BEFORE`/`AFTER` automation, scheduled jobs)](DAY%2011/README.md) | *Stay tuned!* |
+| **09** | [Indexes & Views (Search speeds, composite indexes)](DAY%2009%20-%20Indexes%20and%20Views/README.md) | Completed |
+| **10** | [Stored Procedures & Functions (Variables, logic loops)](DAY%2010%20-%20Stored%20Procedures%20and%20Functions/README.md) | *Stay tuned!* |
+| **11** | [Triggers & Events (`BEFORE`/`AFTER` automation, scheduled jobs)](DAY%2011%20-%20Triggers%20and%20Events/README.md) | *Stay tuned!* |
 
 ### Phase 5: Administration & Tuning
 | Day | Topic | Status |
 | :---: | :--- | :--- |
-| **12** | [User Management & Security (`GRANT`/`REVOKE` privileges)](DAY%2012/README.md) | *Stay tuned!* |
-| **13** | [Query Performance & Tuning (Reading `EXPLAIN` query plans)](DAY%2013/README.md) | *Stay tuned!* |
-| **14** | [Capstone Project (Building a real-world database from scratch)](DAY%2014/README.md) | *Stay tuned!* |
+| **12** | [User Management & Security (`GRANT`/`REVOKE` privileges)](DAY%2012%20-%20User%20Management%20and%20Security/README.md) | *Stay tuned!* |
+| **13** | [Query Performance & Tuning (Reading `EXPLAIN` query plans)](DAY%2013%20-%20Query%20Performance%20and%20Tuning/README.md) | *Stay tuned!* |
+| **14** | [Capstone Project (Building a real-world database from scratch)](DAY%2014%20-%20Capstone%20Project/README.md) | *Stay tuned!* |
 
 ---
 
