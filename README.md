@@ -78,7 +78,7 @@ This course is structured chronologically. Each "Day" is contained within its ow
 ### Phase 5: Administration & Tuning
 | Day | Topic | Status |
 | :---: | :--- | :--- |
-| **12** | [User Management & Security (`GRANT`/`REVOKE` privileges)](DAY%2012%20-%20User%20Management%20and%20Security/README.md) | *Stay tuned!* |
+| **12** | [User Management & Security (`GRANT`/`REVOKE` privileges)](DAY%2012%20-%20User%20Management%20and%20Security/README.md) | Completed |
 | **13** | [Query Performance & Tuning (Reading `EXPLAIN` query plans)](DAY%2013%20-%20Query%20Performance%20and%20Tuning/README.md) | *Stay tuned!* |
 | **14** | [Capstone Project (Building a real-world database from scratch)](DAY%2014%20-%20Capstone%20Project/README.md) | *Stay tuned!* |
 
