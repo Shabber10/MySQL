@@ -91,88 +91,23 @@ SELECT * FROM Accounts WHERE id = 1 FOR UPDATE;
 COMMIT;
 
 
--- =====================================================================
--- 6. ADDITIONAL HANDS-ON: RAHUL & PRIYA TRANSACTIONS & FAILURE DEMO
--- =====================================================================
-
--- Re-setup the accounts table with Rahul and Priya
-DROP TABLE IF EXISTS accounts;
-
-CREATE TABLE accounts (
-    id INT PRIMARY KEY,
-    name VARCHAR(30),
-    balance DECIMAL(10,2)
-) ENGINE=InnoDB; -- Explicitly using InnoDB for transactional guarantees
-
-INSERT INTO accounts VALUES
-(1, 'Rahul', 10000.00),
-(2, 'Priya', 5000.00);
-
--- Query current state
-SELECT * FROM accounts;
-
 -- ---------------------------------------------------------------------
--- Demo 6A: Successful Transfer (COMMIT)
+-- 6. MyISAM vs InnoDB Storage Engine Rollback Test
 -- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS NonTxTable;
+CREATE TABLE NonTxTable (
+    id INT,
+    val VARCHAR(20)
+) ENGINE = MyISAM;
+
+INSERT INTO NonTxTable VALUES (1, 'Initial');
+
+-- Attempting ROLLBACK on MyISAM (Does NOT undo data!)
 START TRANSACTION;
-
--- Deduct ₹2000 from Rahul
-UPDATE accounts
-SET balance = balance - 2000
-WHERE id = 1;
-
--- Add ₹2000 to Priya
-UPDATE accounts
-SET balance = balance + 2000
-WHERE id = 2;
-
-COMMIT;
-
--- Verify both updates succeeded and are saved
-SELECT * FROM accounts; -- Rahul: 8000, Priya: 7000
-
-
--- ---------------------------------------------------------------------
--- Demo 6B: Failure and Explicit Rollback
--- ---------------------------------------------------------------------
-START TRANSACTION;
-
--- Deduct ₹2000 from Rahul (in-memory change to 6000)
-UPDATE accounts
-SET balance = balance - 2000
-WHERE id = 1;
-
--- Simulate database query failure using a non-existent table
--- UPDATE wrong_table SET balance = balance + 2000; -- Uncomment to test error in terminal
-
--- If the statement fails, MySQL does NOT automatically rollback the entire transaction!
--- The transaction remains active. We must manually run ROLLBACK:
+INSERT INTO NonTxTable VALUES (2, 'Second');
 ROLLBACK;
 
--- Verify Rahul's balance is reverted to 8000
-SELECT * FROM accounts;
+-- Record 2 still exists because MyISAM does not support transactions:
+SELECT * FROM NonTxTable;
 
-
--- ---------------------------------------------------------------------
--- Demo 6C: Check and Control Autocommit
--- ---------------------------------------------------------------------
--- View default autocommit setting (1 = ON, 0 = OFF)
-SELECT @@autocommit;
-
--- Disable autocommit
-SET autocommit = 0;
-
--- Now let's update a balance without START TRANSACTION
-UPDATE accounts
-SET balance = 9000
-WHERE id = 1;
-
--- Check changes in current session (shows 9000)
-SELECT * FROM accounts WHERE id = 1;
-
--- Rollback the change (restores to 8000)
-ROLLBACK;
-SELECT * FROM accounts WHERE id = 1;
-
--- Restore autocommit to ON
-SET autocommit = 1;
