@@ -132,10 +132,16 @@ SELECT c.name, o.order_id
 FROM Customers c
 INNER JOIN Orders o ON c.customer_id = o.customer_id;
 
--- B. INNER JOIN using USING clause (matching column names)
+-- B. Implicit WHERE Join (Old-Style)
+SELECT c.name, o.order_id
+FROM Customers c, Orders o
+WHERE c.customer_id = o.customer_id;
+
+-- C. INNER JOIN using USING clause (matching column names)
 SELECT c.name, o.order_id
 FROM Customers c
 INNER JOIN Orders o USING (customer_id);
+
 
 -- C. Non-Equi Join (Salary / Spend Grades)
 -- Join Orders to DiscountRules based on spending bracket ranges
