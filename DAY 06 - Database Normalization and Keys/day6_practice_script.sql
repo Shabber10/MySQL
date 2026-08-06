@@ -132,3 +132,37 @@ DELETE FROM Enrollments WHERE student_id = 3;
 -- CS103 Networks and Dr. Patel are still saved:
 SELECT * FROM Courses;
 SELECT * FROM Instructors;
+
+
+-- ---------------------------------------------------------------------
+-- 6. Boyce-Codd Normal Form (BCNF) Decomposition
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS Student_Advisors;
+DROP TABLE IF EXISTS Advisors;
+
+CREATE TABLE Advisors (
+    advisor VARCHAR(50) PRIMARY KEY,
+    subject VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Student_Advisors (
+    student_id INT,
+    advisor VARCHAR(50),
+    PRIMARY KEY (student_id, advisor),
+    FOREIGN KEY (advisor) REFERENCES Advisors(advisor)
+);
+
+INSERT INTO Advisors VALUES
+('Dr. Rao', 'Java'),
+('Dr. Mehta', 'Python');
+
+INSERT INTO Student_Advisors VALUES
+(101, 'Dr. Rao'),
+(102, 'Dr. Rao'),
+(101, 'Dr. Mehta');
+
+SELECT sa.student_id, sa.advisor, a.subject
+FROM Student_Advisors sa
+JOIN Advisors a ON sa.advisor = a.advisor;
+
