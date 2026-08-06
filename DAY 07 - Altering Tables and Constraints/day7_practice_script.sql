@@ -88,3 +88,26 @@ INSERT INTO StaffDetails (id, name, email, salary) VALUES
 -- Inspect final table details
 DESCRIBE StaffDetails;
 SELECT * FROM StaffDetails;
+
+
+-- ---------------------------------------------------------------------
+-- 5. Special Alterations: Generated Columns & Defaults
+-- ---------------------------------------------------------------------
+
+-- Add a default status column
+ALTER TABLE StaffDetails
+ADD COLUMN status VARCHAR(20);
+
+ALTER TABLE StaffDetails
+ALTER COLUMN status SET DEFAULT 'Active';
+
+-- Add a computed bonus column (10% of salary)
+ALTER TABLE StaffDetails
+ADD COLUMN annual_bonus DECIMAL(10,2) GENERATED ALWAYS AS (salary * 0.10) STORED;
+
+-- Verify default and generated columns
+INSERT INTO StaffDetails (id, name, email, salary) VALUES
+(4, 'Vikram', 'vikram@email.com', 5000.00);
+
+SELECT * FROM StaffDetails WHERE id = 4;
+
