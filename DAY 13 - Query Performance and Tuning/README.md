@@ -1,12 +1,12 @@
-# DAY 13: Query Performance & Tuning
+# DAY 13 — Query Performance and Tuning
 
-This directory contains the curriculum, exercises, and practice scripts for **Query Performance & Tuning**.
+Welcome to **Day 13** of the MySQL Masterclass. This module covers database performance optimization, query execution plan diagnostics with **`EXPLAIN`**, performance anti-patterns, covering indexes, and microsecond profiling.
 
 ---
 
-## 📚 Chapters & Content Outline
+## 📚 Table of Contents
 
-*   **[1. Query Performance Analysis](1.%20Query%20Performance%20Analysis.md)** - Identify database bottlenecks, analyze query execution with session profiling (`SET profiling = 1`), and configure slow query logs.
-*   **[2. Understanding EXPLAIN Query Plans](2.%20Understanding%20EXPLAIN%20Query%20Plans.md)** - Master `EXPLAIN` and `EXPLAIN ANALYZE` outputs, understand join type performance hierarchies (`const` to `ALL`), and apply query optimization best practices.
-*   **[3. Day 13 Hands-on Practice and Exercises](3.%20Day%2013%20Hands-on%20Practice%20and%20Exercises.md)** - Step-by-step hands-on exercises benchmarking unindexed vs. indexed queries.
-*   **[day13_practice_script.sql](day13_practice_script.sql)** - Executable SQL script demonstrating query profiling, `EXPLAIN` plans, and indexing optimizations.
+1. [1. Query Performance Analysis.md](file:///c:/Users/SHABBER%20HUSSAIN/Desktop/MySQL/DAY%2013%20-%20Query%20Performance%20and%20Tuning/1.%20Query%20Performance%20Analysis.md) — Query optimization principles, Slow Query Log (`slow_query_log`), MySQL Query Profiling (`SHOW PROFILE`), and common query anti-patterns.
+2. [2. Understanding EXPLAIN Query Plans.md](file:///c:/Users/SHABBER%20HUSSAIN/Desktop/MySQL/DAY%2013%20-%20Query%20Performance%20and%20Tuning/2.%20Understanding%20EXPLAIN%20Query%20Plans.md) — Anatomy of `EXPLAIN` columns, Join Types hierarchy (`const` > `ref` > `range` > `ALL`), `Extra` warnings (`Using filesort`, `Using temporary`, `Using index`), and `EXPLAIN ANALYZE`.
+3. [3. Day 13 Hands-on Practice and Exercises.md](file:///c:/Users/SHABBER%20HUSSAIN/Desktop/MySQL/DAY%2013%20-%20Query%20Performance%20and%20Tuning/3.%20Day%2013%20Hands-on%20Practice%20and%20Exercises.md) — Hands-on problem statements and step-by-step optimization exercises.
+4. [day13_practice_script.sql](file:///c:/Users/SHABBER%20HUSSAIN/Desktop/MySQL/DAY%2013%20-%20Query%20Performance%20and%20Tuning/day13_practice_script.sql) — Complete executable SQL practice script.
