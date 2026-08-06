@@ -6,13 +6,8 @@
 -- ------------------------------------------
 -- 1. DATABASE SETUP
 -- ------------------------------------------
--- Drop database if it already exists to start fresh
 DROP DATABASE IF EXISTS library_db;
-
--- Create database
 CREATE DATABASE library_db;
-
--- Select database to use
 USE library_db;
 
 
@@ -29,26 +24,21 @@ CREATE TABLE books (
     published_date DATE
 );
 
--- Inspect table structure
 DESCRIBE books;
 
 
 -- ------------------------------------------
 -- 3. INSERTING DATA (CREATE)
 -- ------------------------------------------
-
--- Scenario A: Single row insertion (providing all columns)
 INSERT INTO books (title, author, isbn, price, stock_count, published_date)
 VALUES ('The Great Gatsby', 'F. Scott Fitzgerald', '9780743273565', 15.99, 12, '1925-04-10');
 
--- Scenario B: Multi-row insertion (bulk insert)
 INSERT INTO books (title, author, isbn, price, stock_count, published_date)
 VALUES 
 ('To Kill a Mockingbird', 'Harper Lee', '9780446310789', 12.50, 8, '1960-07-11'),
 ('1984', 'George Orwell', '9780451524935', 9.99, 15, '1949-06-08'),
 ('The Hobbit', 'J.R.R. Tolkien', '9780547928227', 22.00, 5, '1937-09-21');
 
--- Scenario C: Inserting with default value for stock_count (omitting stock_count)
 INSERT INTO books (title, author, isbn, price, published_date)
 VALUES ('New Release Book', 'Unknown Author', '9781111111111', 29.99, '2026-01-01');
 
@@ -56,47 +46,58 @@ VALUES ('New Release Book', 'Unknown Author', '9781111111111', 29.99, '2026-01-0
 -- ------------------------------------------
 -- 4. QUERYING DATA (READ)
 -- ------------------------------------------
-
--- Query A: View all columns and rows
 SELECT * FROM books;
-
--- Query B: View specific columns
 SELECT title, price FROM books;
-
--- Query C: Filtering rows (find books costing less than $15.00)
-SELECT title, author, price FROM books
-WHERE price < 15.00;
-
--- Query D: Filtering rows (find books with stock of 10 or more)
-SELECT title, stock_count FROM books
-WHERE stock_count >= 10;
+SELECT title, author, price FROM books WHERE price < 15.00;
+SELECT title, stock_count FROM books WHERE stock_count >= 10;
 
 
 -- ------------------------------------------
 -- 5. UPDATING DATA (UPDATE)
 -- ------------------------------------------
-
--- Scenario A: Adjust stock count for '1984' (book_id = 3)
-UPDATE books
-SET stock_count = 14
-WHERE book_id = 3;
-
--- Scenario B: Adjust price for 'The Hobbit' (book_id = 4)
-UPDATE books
-SET price = 19.99
-WHERE book_id = 4;
-
--- Verify updates
+UPDATE books SET stock_count = 14 WHERE book_id = 3;
+UPDATE books SET price = 19.99 WHERE book_id = 4;
 SELECT * FROM books;
 
 
 -- ------------------------------------------
 -- 6. DELETING DATA (DELETE)
 -- ------------------------------------------
-
--- Delete 'New Release Book' (book_id = 5)
-DELETE FROM books
-WHERE book_id = 5;
-
--- Verify deletion
+DELETE FROM books WHERE book_id = 5;
 SELECT * FROM books;
+
+
+-- ------------------------------------------
+-- 7. ADVANCED TABLE CREATION & GENERATED COLUMNS
+-- ------------------------------------------
+-- CTAS: Copy structure & data
+CREATE TABLE books_backup AS SELECT * FROM books;
+SELECT * FROM books_backup;
+
+-- CTAS: Copy structure only (WHERE 1=0)
+CREATE TABLE books_empty AS SELECT * FROM books WHERE 1=0;
+DESCRIBE books_empty;
+
+-- GENERATED (COMPUTED) COLUMN
+CREATE TABLE products (
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
+    product_name VARCHAR(50) NOT NULL,
+    unit_price DECIMAL(10,2) NOT NULL,
+    quantity INT NOT NULL,
+    total_price DECIMAL(10,2) GENERATED ALWAYS AS (unit_price * quantity) STORED
+);
+
+INSERT INTO products (product_name, unit_price, quantity) VALUES ('Apple', 20.00, 2);
+SELECT * FROM products;
+
+UPDATE products SET quantity = 5 WHERE product_id = 1;
+SELECT * FROM products;
+
+
+-- ------------------------------------------
+-- 8. COPYING DATA VIA INSERT INTO ... SELECT
+-- ------------------------------------------
+INSERT INTO books_empty (book_id, title, author, isbn, price, stock_count, published_date)
+SELECT book_id, title, author, isbn, price, stock_count, published_date FROM books;
+
+SELECT * FROM books_empty;
