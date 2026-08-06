@@ -4,7 +4,7 @@
 
   [![MySQL Version](https://img.shields.io/badge/mysql-8.0%2B-blue?style=flat-square&logo=mysql)](https://www.mysql.com/)
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-  [![Status](https://img.shields.io/badge/Status-Active-success.svg?style=flat-square)]()
+  [![Status](https://img.shields.io/badge/Status-100%25%20Completed-success.svg?style=flat-square)]()
 </div>
 
 <br>
@@ -24,11 +24,11 @@ This course is structured chronologically. Each "Day" is contained within its ow
 5. Complete the library system case study walk-through in **[Chapter 7](DAY%2001%20-%20Introduction%20to%20Databases%20and%20MySQL/7.%20Hands-on%20Practice%20Guide.md)**.
 6. Copy, paste, and run statements from the interactive **[practice script](DAY%2001%20-%20Introduction%20to%20Databases%20and%20MySQL/day1_practice_script.sql)** to see them work in real-time.
 7. Test your skills and review top coding questions in **[Chapter 9](DAY%2001%20-%20Introduction%20to%20Databases%20and%20MySQL/9.%20DDL%20Practice%20and%20Interview%20Questions.md)**.
-8. Once completed with Day 01, proceed to **[DAY 02](DAY%2002%20-%20Advanced%20Filtering%20with%20WHERE/1.%20Advanced%20Filtering%20with%20WHERE.md)** to learn advanced query filters!
+8. Progress day by day through all 14 modules up to the **[DAY 14 Capstone Project](DAY%2014%20-%20Capstone%20Project/README.md)**!
 
 ---
 
-## 📚 Curriculum
+## 📚 Curriculum Overview
 
 ### Phase 1: MySQL Fundamentals
 | Day | Topic | Start Here |
@@ -42,52 +42,45 @@ This course is structured chronologically. Each "Day" is contained within its ow
 | | **Case Study: Library Management System** | [7. Hands-on Practice Guide.md](DAY%2001%20-%20Introduction%20to%20Databases%20and%20MySQL/7.%20Hands-on%20Practice%20Guide.md) |
 | | **Memory Shortcuts & Mnemonics** | [8. Memory Shortcuts and Cheatsheet.md](DAY%2001%20-%20Introduction%20to%20Databases%20and%20MySQL/8.%20Memory%20Shortcuts%20and%20Cheatsheet.md) |
 | | **DDL Practice Scenarios & Interview Q&A** | [9. DDL Practice and Interview Questions.md](DAY%2001%20-%20Introduction%20to%20Databases%20and%20MySQL/9.%20DDL%20Practice%20and%20Interview%20Questions.md) |
-| **02** | **Advanced Filtering with WHERE (AND / OR / NOT)** | [1. Advanced Filtering with WHERE.md](DAY%2002%20-%20Advanced%20Filtering%20with%20WHERE/1.%20Advanced%20Filtering%20with%20WHERE.md) |
-| | **Range (BETWEEN), List (IN) & Wildcard Matching (LIKE)** | [2. Pattern Matching and Range Operations.md](DAY%2002%20-%20Advanced%20Filtering%20with%20WHERE/2.%20Pattern%20Matching%20and%20Range%20Operations.md) |
-| | **Dealing with Missing Data (IS NULL / IS NOT NULL)** | [3. Dealing with Missing Data.md](DAY%2002%20-%20Advanced%20Filtering%20with%20WHERE/3.%20Dealing%20with%20Missing%20Data.md) |
-| | **Sorting (ORDER BY) & Restricting Results (LIMIT)** | [4. Sorting and Restricting Results.md](DAY%2002%20-%20Advanced%20Filtering%20with%20WHERE/4.%20Sorting%20and%20Restricting%20Results.md) |
+| **02** | **Advanced Filtering with WHERE (AND / OR / NOT / XOR)** | [1. Advanced Filtering with WHERE.md](DAY%2002%20-%20Advanced%20Filtering%20with%20WHERE/1.%20Advanced%20Filtering%20with%20WHERE.md) |
+| | **Range (BETWEEN), List (IN), Bitwise & REGEXP** | [2. Pattern Matching and Range Operations.md](DAY%2002%20-%20Advanced%20Filtering%20with%20WHERE/2.%20Pattern%20Matching%20and%20Range%20Operations.md) |
+| | **Dealing with Missing Data (IS NULL / <=> NULL-Safe)** | [3. Dealing with Missing Data.md](DAY%2002%20-%20Advanced%20Filtering%20with%20WHERE/3.%20Dealing%20with%20Missing%20Data.md) |
+| | **Sorting (ORDER BY) & Pagination (LIMIT OFFSET)** | [4. Sorting and Restricting Results.md](DAY%2002%20-%20Advanced%20Filtering%20with%20WHERE/4.%20Sorting%20and%20Restricting%20Results.md) |
 | | **HR Company Database Practice Scenario** | [5. Day 02 Hands-on Practice and Exercises.md](DAY%2002%20-%20Advanced%20Filtering%20with%20WHERE/5.%20Day%202%20Hands-on%20Practice%20and%20Exercises.md) |
 | | **Interactive SQL Script** | [day2_practice_script.sql](DAY%2002%20-%20Advanced%20Filtering%20with%20WHERE/day2_practice_script.sql) |
 | **03** | **Aggregations & Grouping (COUNT, SUM, AVG, MIN, MAX)** | [1. Introduction to Aggregations.md](DAY%2003%20-%20Aggregations%20and%20Grouping/1.%20Introduction%20to%20Aggregations.md) |
-| | **Grouping Data with GROUP BY** | [2. Grouping Data with GROUP BY.md](DAY%2003%20-%20Aggregations%20and%20Grouping/2.%20Grouping%20Data%20with%20GROUP%20BY.md) |
+| | **Grouping Data with GROUP BY & WITH ROLLUP** | [2. Grouping Data with GROUP BY.md](DAY%2003%20-%20Aggregations%20and%20Grouping/2.%20Grouping%20Data%20with%20GROUP%20BY.md) |
 | | **Filtering Groups with HAVING** | [3. Filtering Groups with HAVING.md](DAY%2003%20-%20Aggregations%20and%20Grouping/3.%20Filtering%20Groups%20with%20HAVING.md) |
-| | **Built-in Math & String Functions** | [4. Built-in Math and String Functions.md](DAY%2003%20-%20Aggregations%20and%20Grouping/4.%20Built-in%20Math%20and%20String%20Functions.md) |
+| | **Built-in Math, String, System & Date Functions** | [4. Built-in Math and String Functions.md](DAY%2003%20-%20Aggregations%20and%20Grouping/4.%20Built-in%20Math%20and%20String%20Functions.md) |
 | | **Practice Scenario & Exercises** | [5. Day 03 Practice Scenario and Exercises.md](DAY%2003%20-%20Aggregations%20and%20Grouping/5.%20Day%203%20Practice%20Scenario%20and%20Exercises.md) |
 | | **Interactive SQL Script** | [day3_practice_script.sql](DAY%2003%20-%20Aggregations%20and%20Grouping/day3_practice_script.sql) |
 
 ### Phase 2: Relational Schema & Intermediate Querying
 | Day | Topic | Status |
 | :---: | :--- | :--- |
-| **04** | [Table Joins (Inner, Left, Right, Full, Self, Cross, Equi, Non-Equi, Natural Joins & Performance)](DAY%2004%20-%20Table%20Joins/README.md) | Completed |
-| **05** | [Subqueries & CTEs (`WITH` clauses)](DAY%2005%20-%20Subqueries%2C%20Set%20Operators%20and%20CTEs/README.md) | Completed |
+| **04** | [Table Joins (Inner, Left, Right, Full, Self, Cross, Equi, Non-Equi, Implicit WHERE & Performance)](DAY%2004%20-%20Table%20Joins/README.md) | Completed ✅ |
+| **05** | [Subqueries, Correlated Subqueries, Set Operators & CTEs (`WITH` clauses)](DAY%2005%20-%20Subqueries%2C%20Set%20Operators%20and%20CTEs/README.md) | Completed ✅ |
 
 ### Phase 3: Schema Design & Database Control
 | Day | Topic | Status |
 | :---: | :--- | :--- |
-| **06** | [Database Normalization & Keys (1NF, 2NF, 3NF design principles)](DAY%2006%20-%20Database%20Normalization%20and%20Keys/README.md) | Completed |
-| **07** | [Altering Tables & Constraints (`ALTER TABLE`)](DAY%2007%20-%20Altering%20Tables%20and%20Constraints/README.md) | Completed |
-| **08** | [Transactions & Concurrency (ACID properties, `COMMIT`, `ROLLBACK`)](DAY%2008%20-%20Transactions%20and%20Concurrency/README.md) | Completed |
+| **06** | [Database Normalization & Keys (1NF, 2NF, 3NF, BCNF 3.5NF, Primary/Candidate/Super/Alternate Keys)](DAY%2006%20-%20Database%20Normalization%20and%20Keys/README.md) | Completed ✅ |
+| **07** | [Altering Tables & Constraints (`ALTER TABLE`, Generated Columns, SET DEFAULT)](DAY%2007%20-%20Altering%20Tables%20and%20Constraints/README.md) | Completed ✅ |
+| **08** | [Transactions & Concurrency (ACID properties, Redo/Undo logs, `COMMIT`, `ROLLBACK`, Isolation Levels)](DAY%2008%20-%20Transactions%20and%20Concurrency/README.md) | Completed ✅ |
 
 ### Phase 4: Stored Programs & Programmability
 | Day | Topic | Status |
 | :---: | :--- | :--- |
-| **09** | [Indexes & Views (Search speeds, composite indexes)](DAY%2009%20-%20Indexes%20and%20Views/README.md) | Completed |
-| **10** | [Stored Procedures & Functions (Variables, logic loops)](DAY%2010%20-%20Stored%20Procedures%20and%20Functions/README.md) | *Stay tuned!* |
-| **11** | [Triggers & Events (`BEFORE`/`AFTER` automation, scheduled jobs)](DAY%2011%20-%20Triggers%20and%20Events/README.md) | *Stay tuned!* |
+| **09** | [Indexes & Views (Search speeds, B-Tree indexes, Updatable Views `WITH CHECK OPTION`)](DAY%2009%20-%20Indexes%20and%20Views/README.md) | Completed ✅ |
+| **10** | [Stored Procedures & Functions (Variables, Delimiters, IN/OUT/INOUT parameters, UDFs, IF-ELSE, WHILE)](DAY%2010%20-%20Stored%20Procedures%20and%20Functions/README.md) | Completed ✅ |
+| **11** | [Triggers & Events (`BEFORE`/`AFTER` automation, OLD/NEW pseudo-records, SIGNAL SQLSTATE, Scheduled jobs)](DAY%2011%20-%20Triggers%20and%20Events/README.md) | Completed ✅ |
 
 ### Phase 5: Administration & Tuning
 | Day | Topic | Status |
 | :---: | :--- | :--- |
-| **12** | [User Management & Security (`GRANT`/`REVOKE` privileges)](DAY%2012%20-%20User%20Management%20and%20Security/README.md) | Completed |
-| **13** | [Query Performance & Tuning (Reading `EXPLAIN` query plans)](DAY%2013%20-%20Query%20Performance%20and%20Tuning/README.md) | *Stay tuned!* |
-| **14** | [Capstone Project (Building a real-world database from scratch)](DAY%2014%20-%20Capstone%20Project/README.md) | *Stay tuned!* |
-
----
-
-## 📤 Push Changes to GitHub
-To push new notes, exercises, or edits to GitHub:
-*   Double-click the **[upload_to_github.bat](upload_to_github.bat)** file located in the root of this folder.
-*   It will automatically open a command window, stage all files, commit them with a default message, and push everything to your GitHub repository.
+| **12** | [User Management & Security (`GRANT`/`REVOKE` privileges, Hostnames, `mysql.user`)](DAY%2012%20-%20User%20Management%20and%20Security/README.md) | Completed ✅ |
+| **13** | [Query Performance & Tuning (Reading `EXPLAIN` query plans, Join Type hierarchy, Slow Query Log, Profiling)](DAY%2013%20-%20Query%20Performance%20and%20Tuning/README.md) | Completed ✅ |
+| **14** | [Capstone Project (Building ShopSphere E-Commerce System from scratch)](DAY%2014%20-%20Capstone%20Project/README.md) | Completed ✅ |
 
 ---
 
