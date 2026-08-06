@@ -260,3 +260,30 @@ WHERE dept = (
     FROM Employees
     WHERE salary = (SELECT MIN(salary) FROM Employees)
 );
+
+-- Q18. Correlated Subquery: Employees earning more than average of their own department
+SELECT e1.emp_name, e1.salary, e1.dept
+FROM Employees e1
+WHERE e1.salary > (
+    SELECT AVG(e2.salary)
+    FROM Employees e2
+    WHERE e2.dept = e1.dept
+);
+
+-- Q19. Correlated Subquery: Employees earning more than minimum of all other employees
+SELECT e1.emp_name, e1.salary
+FROM Employees e1
+WHERE e1.salary > (
+    SELECT MIN(e2.salary)
+    FROM Employees e2
+    WHERE e2.emp_id <> e1.emp_id
+);
+
+-- Q20. EXISTS: Departments with at least one employee earning > 20000
+SELECT DISTINCT d.dept
+FROM Employees d
+WHERE EXISTS (
+    SELECT 1 FROM Employees e 
+    WHERE e.dept = d.dept AND e.salary > 20000
+);
+
