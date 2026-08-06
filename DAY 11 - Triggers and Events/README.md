@@ -1,12 +1,12 @@
-# DAY 11: Triggers & Events
+# DAY 11 — Triggers and Events
 
-This directory contains the curriculum, exercises, and practice scripts for **Triggers & Events**.
+Welcome to **Day 11** of the MySQL Masterclass. This module covers database automation using **Event-driven Triggers** and **Time-scheduled Background Events**.
 
 ---
 
-## 📚 Chapters & Content Outline
+## 📚 Table of Contents
 
-*   **[1. Automation with Triggers](1.%20Automation%20with%20Triggers.md)** - Master `BEFORE` and `AFTER` triggers on `INSERT`, `UPDATE`, `DELETE`, and use `NEW` / `OLD` row references for audit logs.
-*   **[2. Scheduled Tasks with Events](2.%20Scheduled%20Tasks%20with%20Events.md)** - Automate database maintenance using MySQL Event Scheduler (`@@event_scheduler`) for ONE-TIME and RECURRING events.
-*   **[3. Day 11 Hands-on Practice and Exercises](3.%20Day%2011%20Hands-on%20Practice%20and%20Exercises.md)** - Hands-on tasks creating price audit triggers and automated low-stock alert events.
-*   **[day11_practice_script.sql](day11_practice_script.sql)** - Executable SQL script testing triggers, audit logs, and event scheduler tasks.
+1. [1. Automation with Triggers.md](file:///c:/Users/SHABBER%20HUSSAIN/Desktop/MySQL/DAY%2011%20-%20Triggers%20and%20Events/1.%20Automation%20with%20Triggers.md) — What are Triggers, Timing (`BEFORE`/`AFTER`), Events (`INSERT`/`UPDATE`/`DELETE`), Pseudo-records (`OLD`/`NEW`), Audit logging, and `SIGNAL SQLSTATE` validation errors.
+2. [2. Scheduled Tasks with Events.md](file:///c:/Users/SHABBER%20HUSSAIN/Desktop/MySQL/DAY%2011%20-%20Triggers%20and%20Events/2.%20Scheduled%20Tasks%20with%20Events.md) — Background Task Scheduling, Event Scheduler (`event_scheduler`), One-time events vs Recurring events, and Event management.
+3. [3. Day 11 Hands-on Practice and Exercises.md](file:///c:/Users/SHABBER%20HUSSAIN/Desktop/MySQL/DAY%2011%20-%20Triggers%20and%20Events/3.%20Day%2011%20Hands-on%20Practice%20and%20Exercises.md) — Hands-on problem statements and verification steps.
+4. [day11_practice_script.sql](file:///c:/Users/SHABBER%20HUSSAIN/Desktop/MySQL/DAY%2011%20-%20Triggers%20and%20Events/day11_practice_script.sql) — Complete executable SQL practice script.
