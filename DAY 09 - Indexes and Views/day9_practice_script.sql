@@ -99,9 +99,29 @@ FROM Customers
 WHERE city = 'Delhi'
 WITH CHECK OPTION;
 
--- Query replaced view
-SELECT * FROM v_delhi_customers;
+-- Inspect active views in the database:
+SHOW FULL TABLES WHERE Table_type = 'VIEW';
 
--- Clean up
-DROP VIEW v_delhi_customers;
-DROP VIEW v_customer_sales;
+
+-- ---------------------------------------------------------------------
+-- 5. Creating and Inspecting B-Tree Indexes
+-- ---------------------------------------------------------------------
+
+-- Create a Single-column Index on City
+CREATE INDEX idx_customers_city ON Customers(city);
+
+-- Create a Composite Index on Name and Email
+CREATE INDEX idx_customers_name_email ON Customers(name, email);
+
+-- Inspect active indexes on Customers table
+SHOW INDEX FROM Customers;
+
+-- Inspect query execution plan using EXPLAIN
+EXPLAIN SELECT * FROM Customers WHERE city = 'Delhi';
+
+-- Clean up Indexes and Views
+DROP INDEX idx_customers_city ON Customers;
+DROP INDEX idx_customers_name_email ON Customers;
+DROP VIEW IF EXISTS v_delhi_customers;
+DROP VIEW IF EXISTS v_customer_sales;
+
