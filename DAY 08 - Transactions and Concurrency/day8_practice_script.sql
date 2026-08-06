@@ -89,3 +89,25 @@ START TRANSACTION;
 SELECT * FROM Accounts WHERE id = 1 FOR UPDATE;
 -- (Other sessions updates/locks block)
 COMMIT;
+
+
+-- ---------------------------------------------------------------------
+-- 6. MyISAM vs InnoDB Storage Engine Rollback Test
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS NonTxTable;
+CREATE TABLE NonTxTable (
+    id INT,
+    val VARCHAR(20)
+) ENGINE = MyISAM;
+
+INSERT INTO NonTxTable VALUES (1, 'Initial');
+
+-- Attempting ROLLBACK on MyISAM (Does NOT undo data!)
+START TRANSACTION;
+INSERT INTO NonTxTable VALUES (2, 'Second');
+ROLLBACK;
+
+-- Record 2 still exists because MyISAM does not support transactions:
+SELECT * FROM NonTxTable;
+
