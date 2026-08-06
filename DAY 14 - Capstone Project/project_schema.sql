@@ -1,151 +1,259 @@
 -- =====================================================================
--- Day 14 Capstone Project: ShopSphere Enterprise E-Commerce Database
+-- Day 14 Capstone Project: ShopSphere E-Commerce System
+-- Complete Production Database Schema & Verification Script
 -- =====================================================================
 
 CREATE DATABASE IF NOT EXISTS shopsphere_db;
 USE shopsphere_db;
 
--- 1. Table Definitions
-DROP TABLE IF EXISTS OrderItems;
-DROP TABLE IF EXISTS Orders;
-DROP TABLE IF EXISTS Products;
-DROP TABLE IF EXISTS Categories;
-DROP TABLE IF EXISTS Customers;
-DROP TABLE IF EXISTS PriceAudit;
+-- Drop existing objects
+DROP VIEW IF EXISTS v_out_of_stock_products;
+DROP VIEW IF EXISTS v_customer_revenue_ranking;
+DROP PROCEDURE IF EXISTS PlaceOrder;
+DROP TRIGGER IF EXISTS after_order_item_inserted;
 
-CREATE TABLE Customers (
-    customer_id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    city VARCHAR(50),
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+DROP TABLE IF EXISTS PAYMENTS;
+DROP TABLE IF EXISTS ORDER_ITEMS;
+DROP TABLE IF EXISTS ORDERS;
+DROP TABLE IF EXISTS PRODUCTS;
+DROP TABLE IF EXISTS CATEGORIES;
+DROP TABLE IF EXISTS USERS;
+DROP TABLE IF EXISTS AUDIT_LOG;
+
+
+-- ---------------------------------------------------------------------
+-- 1. Table Definitions (Normalized 3NF)
+-- ---------------------------------------------------------------------
+
+CREATE TABLE USERS (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    city VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE Categories (
+CREATE TABLE CATEGORIES (
     category_id INT PRIMARY KEY AUTO_INCREMENT,
-    category_name VARCHAR(50) NOT NULL
+    category_name VARCHAR(50) NOT NULL UNIQUE
 );
 
-CREATE TABLE Products (
+CREATE TABLE PRODUCTS (
     product_id INT PRIMARY KEY AUTO_INCREMENT,
+    category_id INT NOT NULL,
     product_name VARCHAR(100) NOT NULL,
-    category_id INT,
-    price DECIMAL(10,2) NOT NULL,
-    stock_quantity INT DEFAULT 0,
-    FOREIGN KEY (category_id) REFERENCES Categories(category_id) ON DELETE SET NULL
+    price DECIMAL(10,2) NOT NULL CHECK (price >= 0),
+    stock_quantity INT NOT NULL DEFAULT 0 CHECK (stock_quantity >= 0),
+    FOREIGN KEY (category_id) REFERENCES CATEGORIES(category_id) ON DELETE RESTRICT
 );
 
-CREATE TABLE Orders (
+CREATE TABLE ORDERS (
     order_id INT PRIMARY KEY AUTO_INCREMENT,
-    customer_id INT,
-    order_date DATE DEFAULT (CURRENT_DATE),
+    user_id INT NOT NULL,
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    order_status VARCHAR(30) DEFAULT 'Pending',
     total_amount DECIMAL(10,2) DEFAULT 0.00,
-    status VARCHAR(20) DEFAULT 'PENDING',
-    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES USERS(user_id) ON DELETE CASCADE
 );
 
-CREATE TABLE OrderItems (
-    item_id INT PRIMARY KEY AUTO_INCREMENT,
-    order_id INT,
-    product_id INT,
-    quantity INT NOT NULL,
+CREATE TABLE ORDER_ITEMS (
+    order_item_id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL CHECK (quantity > 0),
     unit_price DECIMAL(10,2) NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE CASCADE,
-    FOREIGN KEY (product_id) REFERENCES Products(product_id) ON DELETE CASCADE
+    FOREIGN KEY (order_id) REFERENCES ORDERS(order_id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES PRODUCTS(product_id) ON DELETE CASCADE
 );
 
-CREATE TABLE PriceAudit (
-    audit_id INT PRIMARY KEY AUTO_INCREMENT,
-    product_id INT,
-    old_price DECIMAL(10,2),
-    new_price DECIMAL(10,2),
-    changed_at DATETIME DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE PAYMENTS (
+    payment_id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT NOT NULL UNIQUE,
+    payment_method VARCHAR(30) NOT NULL,
+    payment_status VARCHAR(30) DEFAULT 'Success',
+    amount_paid DECIMAL(10,2) NOT NULL,
+    payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (order_id) REFERENCES ORDERS(order_id) ON DELETE CASCADE
 );
 
--- 2. Initial Data Ingestion
-INSERT INTO Customers (name, email, city) VALUES
-('Rahul Sharma', 'rahul@example.com', 'Hyderabad'),
-('Priya Singh', 'priya@example.com', 'Bengaluru'),
-('Amit Patel', 'amit@example.com', 'Mumbai');
+CREATE TABLE AUDIT_LOG (
+    log_id INT PRIMARY KEY AUTO_INCREMENT,
+    log_message VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
-INSERT INTO Categories (category_name) VALUES
+
+-- ---------------------------------------------------------------------
+-- 2. Indexes for Query Performance
+-- ---------------------------------------------------------------------
+
+CREATE INDEX idx_orders_user ON ORDERS(user_id);
+CREATE INDEX idx_order_items_product ON ORDER_ITEMS(product_id);
+CREATE INDEX idx_products_category ON PRODUCTS(category_id);
+CREATE INDEX idx_orders_date ON ORDERS(order_date);
+
+
+-- ---------------------------------------------------------------------
+-- 3. Seed Data Ingestion
+-- ---------------------------------------------------------------------
+
+INSERT INTO USERS (full_name, email, city) VALUES
+('Rahul Sharma', 'rahul@email.com', 'Delhi'),
+('Priya Singh',  'priya@email.com', 'Mumbai'),
+('Amit Patel',   'amit@email.com',  'Delhi'),
+('Sara Khan',    'sara@email.com',   'Chennai'),
+('John Doe',     'john@email.com',   'Bangalore');
+
+INSERT INTO CATEGORIES (category_name) VALUES
 ('Electronics'),
-('Clothing'),
-('Books');
+('Apparel'),
+('Home Appliances');
 
-INSERT INTO Products (product_name, category_id, price, stock_quantity) VALUES
-('Smartphone X', 1, 25000.00, 30),
-('Wireless Earbuds', 1, 3000.00, 50),
-('Cotton T-Shirt', 2, 800.00, 100),
-('Database Design Book', 3, 1200.00, 40);
+INSERT INTO PRODUCTS (category_id, product_name, price, stock_quantity) VALUES
+(1, 'Laptop Pro 15', 75000.00, 15),
+(1, 'Wireless Earbuds', 3000.00, 50),
+(1, 'Smartphone 5G', 25000.00, 30),
+(2, 'Cotton T-Shirt',    800.00, 100),
+(3, 'Coffee Maker',     4500.00,  0);
 
--- 3. Audit Trigger Definition
+
+-- ---------------------------------------------------------------------
+-- 4. Automation Trigger: Auto Stock Reduction & Audit Log
+-- ---------------------------------------------------------------------
+
 DELIMITER //
-CREATE TRIGGER trg_audit_product_price
-AFTER UPDATE ON Products
+
+CREATE TRIGGER after_order_item_inserted
+AFTER INSERT ON ORDER_ITEMS
 FOR EACH ROW
 BEGIN
-    IF OLD.price <> NEW.price THEN
-        INSERT INTO PriceAudit (product_id, old_price, new_price)
-        VALUES (OLD.product_id, OLD.price, NEW.price);
-    END IF;
+    -- Deduct stock count in PRODUCTS
+    UPDATE PRODUCTS
+    SET stock_quantity = stock_quantity - NEW.quantity
+    WHERE product_id = NEW.product_id;
+
+    -- Write record to AUDIT_LOG
+    INSERT INTO AUDIT_LOG (log_message)
+    VALUES (CONCAT('Stock deducted for Product #', NEW.product_id, ' (Qty: ', NEW.quantity, ') for Order #', NEW.order_id));
 END //
+
 DELIMITER ;
 
--- 4. Order Processing Transaction Stored Procedure
+
+-- ---------------------------------------------------------------------
+-- 5. Stored Procedure: PlaceOrder (ACID Compliant)
+-- ---------------------------------------------------------------------
+
 DELIMITER //
-CREATE PROCEDURE ProcessOrder(
-    IN p_customer_id INT,
+
+CREATE PROCEDURE PlaceOrder(
+    IN p_user_id INT,
     IN p_product_id INT,
-    IN p_quantity INT
+    IN p_quantity INT,
+    OUT p_order_id INT,
+    OUT p_status VARCHAR(100)
 )
 BEGIN
     DECLARE v_price DECIMAL(10,2);
     DECLARE v_stock INT;
-    DECLARE v_order_id INT;
+    DECLARE v_total DECIMAL(10,2);
+
+    -- Exit Handler for SQL Exception (Automatic Rollback)
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        SET p_order_id = NULL;
+        SET p_status = 'ERROR: Order processing failed. Transaction rolled back.';
+    END;
 
     START TRANSACTION;
 
+    -- Check product availability and price
     SELECT price, stock_quantity INTO v_price, v_stock
-    FROM Products WHERE product_id = p_product_id FOR UPDATE;
+    FROM PRODUCTS
+    WHERE product_id = p_product_id;
 
-    IF v_stock >= p_quantity THEN
-        UPDATE Products SET stock_quantity = stock_quantity - p_quantity WHERE product_id = p_product_id;
+    -- Validate stock quantity
+    IF v_stock < p_quantity THEN
+        ROLLBACK;
+        SET p_order_id = NULL;
+        SET p_status = 'ERROR: Insufficient stock available.';
+    ELSE
+        -- Calculate total
+        SET v_total = v_price * p_quantity;
 
-        INSERT INTO Orders (customer_id, order_date, total_amount, status)
-        VALUES (p_customer_id, CURDATE(), v_price * p_quantity, 'COMPLETED');
+        -- Insert master order
+        INSERT INTO ORDERS (user_id, order_status, total_amount)
+        VALUES (p_user_id, 'Completed', v_total);
 
-        SET v_order_id = LAST_INSERT_ID();
+        SET p_order_id = LAST_INSERT_ID();
 
-        INSERT INTO OrderItems (order_id, product_id, quantity, unit_price)
-        VALUES (v_order_id, p_product_id, p_quantity, v_price);
+        -- Insert line item (triggers stock reduction)
+        INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price)
+        VALUES (p_order_id, p_product_id, p_quantity, v_price);
+
+        -- Insert payment
+        INSERT INTO PAYMENTS (order_id, payment_method, payment_status, amount_paid)
+        VALUES (p_order_id, 'Credit Card', 'Success', v_total);
 
         COMMIT;
-        SELECT 'Order Processed Successfully!' AS result;
-    ELSE
-        ROLLBACK;
-        SELECT 'Order Failed: Insufficient Inventory!' AS result;
+        SET p_status = 'SUCCESS: Order placed successfully.';
     END IF;
 END //
+
 DELIMITER ;
 
--- 5. Analytical Views
-CREATE VIEW vw_SalesSummary AS
+
+-- ---------------------------------------------------------------------
+-- 6. Analytical Views
+-- ---------------------------------------------------------------------
+
+CREATE VIEW v_customer_revenue_ranking AS
 SELECT 
-    c.category_name,
-    COUNT(DISTINCT o.order_id) AS total_orders,
-    SUM(o.total_amount) AS total_revenue
-FROM Categories c
-JOIN Products p ON c.category_id = p.category_id
-JOIN Orders o ON p.product_id = o.product_id
-GROUP BY c.category_name;
+    u.user_id,
+    u.full_name,
+    u.city,
+    COUNT(DISTINCT o.order_id) AS total_orders_placed,
+    IFNULL(SUM(o.total_amount), 0) AS lifetime_spend,
+    DENSE_RANK() OVER (ORDER BY IFNULL(SUM(o.total_amount), 0) DESC) AS revenue_rank
+FROM USERS u
+LEFT JOIN ORDERS o ON u.user_id = o.user_id
+GROUP BY u.user_id, u.full_name, u.city;
 
--- 6. Indexing for Search Optimization
-CREATE INDEX idx_products_category ON Products(category_id);
-CREATE INDEX idx_orders_customer ON Orders(customer_id);
+CREATE VIEW v_out_of_stock_products AS
+SELECT p.product_id, p.product_name, c.category_name, p.price
+FROM PRODUCTS p
+JOIN CATEGORIES c ON p.category_id = c.category_id
+WHERE p.stock_quantity = 0;
 
--- Test Procedure
-CALL ProcessOrder(1, 1, 2);
-SELECT * FROM Orders;
-SELECT * FROM OrderItems;
-SELECT * FROM Products WHERE product_id = 1;
+
+-- ---------------------------------------------------------------------
+-- 7. Verification & End-to-End Execution
+-- ---------------------------------------------------------------------
+
+-- Test Case 1: Rahul (User 1) places order for 2 Laptops (Product 1)
+CALL PlaceOrder(1, 1, 2, @ord1, @stat1);
+SELECT @ord1 AS order_id_1, @stat1 AS status_1;
+
+-- Test Case 2: Priya (User 2) places order for 1 Smartphone (Product 3)
+CALL PlaceOrder(2, 3, 1, @ord2, @stat2);
+SELECT @ord2 AS order_id_2, @stat2 AS status_2;
+
+-- Test Case 3: Insufficient Stock Test (Attempt 99 Coffee Makers -> Should Fail)
+CALL PlaceOrder(3, 5, 99, @ord3, @stat3);
+SELECT @ord3 AS order_id_3, @stat3 AS status_3;
+
+-- Verify Updated Laptop Stock (15 -> 13)
+SELECT product_id, product_name, stock_quantity FROM PRODUCTS WHERE product_id = 1;
+
+-- Verify Audit Log entries
+SELECT * FROM AUDIT_LOG;
+
+-- Verify Customer Revenue Rankings
+SELECT * FROM v_customer_revenue_ranking;
+
+-- Verify Out of Stock View (Coffee Maker should appear)
+SELECT * FROM v_out_of_stock_products;
+
+-- Verify Query Execution Plan
+EXPLAIN SELECT * FROM ORDERS WHERE user_id = 1;
