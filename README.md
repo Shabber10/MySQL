@@ -48,12 +48,13 @@ This course is structured chronologically. Each "Day" is contained within its ow
 | | **Sorting (ORDER BY) & Pagination (LIMIT OFFSET)** | [4. Sorting and Restricting Results.md](DAY%2002%20-%20Advanced%20Filtering%20with%20WHERE/4.%20Sorting%20and%20Restricting%20Results.md) |
 | | **HR Company Database Practice Scenario** | [5. Day 02 Hands-on Practice and Exercises.md](DAY%2002%20-%20Advanced%20Filtering%20with%20WHERE/5.%20Day%202%20Hands-on%20Practice%20and%20Exercises.md) |
 | | **Interactive SQL Script** | [day2_practice_script.sql](DAY%2002%20-%20Advanced%20Filtering%20with%20WHERE/day2_practice_script.sql) |
-| **03** | **Aggregations & Grouping (COUNT, SUM, AVG, MIN, MAX)** | [1. Introduction to Aggregations.md](DAY%2003%20-%20Aggregations%20and%20Grouping/1.%20Introduction%20to%20Aggregations.md) |
+| **03** | [Aggregations & Grouping (COUNT, SUM, AVG, MIN, MAX, WITH ROLLUP)](DAY%2003%20-%20Aggregations%20and%20Grouping/README.md) | [1. Introduction to Aggregations.md](DAY%2003%20-%20Aggregations%20and%20Grouping/1.%20Introduction%20to%20Aggregations.md) |
 | | **Grouping Data with GROUP BY & WITH ROLLUP** | [2. Grouping Data with GROUP BY.md](DAY%2003%20-%20Aggregations%20and%20Grouping/2.%20Grouping%20Data%20with%20GROUP%20BY.md) |
 | | **Filtering Groups with HAVING** | [3. Filtering Groups with HAVING.md](DAY%2003%20-%20Aggregations%20and%20Grouping/3.%20Filtering%20Groups%20with%20HAVING.md) |
 | | **Built-in Math, String, System & Date Functions** | [4. Built-in Math and String Functions.md](DAY%2003%20-%20Aggregations%20and%20Grouping/4.%20Built-in%20Math%20and%20String%20Functions.md) |
-| | **Practice Scenario & Exercises** | [5. Day 03 Practice Scenario and Exercises.md](DAY%2003%20-%20Aggregations%20and%20Grouping/5.%20Day%203%20Practice%20Scenario%20and%20Exercises.md) |
+| | **Practice Exercises (Q1 - Q20)** | [5. Day 03 Practice Scenario and Exercises.md](DAY%2003%20-%20Aggregations%20and%20Grouping/5.%20Day%203%20Practice%20Scenario%20and%20Exercises.md) |
 | | **Interactive SQL Script** | [day3_practice_script.sql](DAY%2003%20-%20Aggregations%20and%20Grouping/day3_practice_script.sql) |
+
 
 ### Phase 2: Relational Schema & Intermediate Querying
 | Day | Topic | Status |
