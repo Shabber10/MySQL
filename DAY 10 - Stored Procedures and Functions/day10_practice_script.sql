@@ -5,153 +5,177 @@
 CREATE DATABASE IF NOT EXISTS day10_practice;
 USE day10_practice;
 
--- 1. Setup Sample Tables
-DROP TABLE IF EXISTS cust;
-CREATE TABLE cust (
-    id INT PRIMARY KEY,
-    name VARCHAR(50),
-    city VARCHAR(50)
-);
-
-INSERT INTO cust VALUES
-(1, 'Raju', 'Hyderabad'),
-(2, 'Rajesh', 'Bengaluru'),
-(3, 'Ram', 'Chennai'),
-(4, 'Pooja', 'Amritsar');
-
+DROP TABLE IF EXISTS AuditLog;
 DROP TABLE IF EXISTS Employees;
+
 CREATE TABLE Employees (
     emp_id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50),
-    department VARCHAR(50),
+    dept VARCHAR(50),
     salary DECIMAL(10,2),
-    city VARCHAR(50)
+    birth_date DATE
 );
 
-INSERT INTO Employees (name, department, salary, city) VALUES
-('Raju', 'HR', 45000.00, 'Hyderabad'),
-('Rajesh', 'IT', 65000.00, 'Bengaluru'),
-('Ram', 'IT', 72000.00, 'Chennai'),
-('Pooja', 'Finance', 58000.00, 'Amritsar'),
-('Sita', 'HR', 48000.00, 'Delhi');
+CREATE TABLE AuditLog (
+    log_id INT PRIMARY KEY AUTO_INCREMENT,
+    log_message VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
--- ---------------------------------------------------------------------
--- 2. Stored Procedure Definitions
--- ---------------------------------------------------------------------
-
--- A. Select All Customers Procedure
-DROP PROCEDURE IF EXISTS GetAllCustomers;
-DELIMITER //
-CREATE PROCEDURE GetAllCustomers()
-BEGIN
-   SELECT * FROM cust;
-END //
-DELIMITER ;
-
--- Test Procedure
-CALL GetAllCustomers();
-
-
--- B. Select Customer By ID Procedure
-DROP PROCEDURE IF EXISTS GetCustomerById;
-DELIMITER //
-CREATE PROCEDURE GetCustomerById(IN cust_id INT)
-BEGIN
-   SELECT * FROM cust WHERE id = cust_id;
-END //
-DELIMITER ;
-
--- Test Procedure
-CALL GetCustomerById(2);
-
-
--- C. Insert Customer Procedure
-DROP PROCEDURE IF EXISTS InsertCustomer;
-DELIMITER //
-CREATE PROCEDURE InsertCustomer(
-    IN cust_id INT,
-    IN cust_name VARCHAR(50),
-    IN cust_city VARCHAR(50)
-)
-BEGIN
-   INSERT INTO cust (id, name, city) VALUES (cust_id, cust_name, cust_city);
-   SELECT 'Customer Inserted Successfully!' AS message;
-END //
-DELIMITER ;
-
--- Test Procedure
-CALL InsertCustomer(5, 'Ravi', 'Delhi');
-SELECT * FROM cust;
-
-
--- D. Update Customer City Procedure
-DROP PROCEDURE IF EXISTS UpdateCustomerCity;
-DELIMITER //
-CREATE PROCEDURE UpdateCustomerCity(
-    IN cust_id INT,
-    IN new_city VARCHAR(50)
-)
-BEGIN
-   UPDATE cust SET city = new_city WHERE id = cust_id;
-   SELECT 'Customer Updated Successfully!' AS message;
-END //
-DELIMITER ;
-
--- Test Procedure
-CALL UpdateCustomerCity(3, 'Pune');
-SELECT * FROM cust;
-
-
--- E. Delete Customer Procedure
-DROP PROCEDURE IF EXISTS DeleteCustomer;
-DELIMITER //
-CREATE PROCEDURE DeleteCustomer(IN cust_id INT)
-BEGIN
-   DELETE FROM cust WHERE id = cust_id;
-   SELECT 'Customer Deleted Successfully!' AS message;
-END //
-DELIMITER ;
-
--- Test Procedure
-CALL DeleteCustomer(4);
-SELECT * FROM cust;
+INSERT INTO Employees (name, dept, salary, birth_date) VALUES
+('Rahul Sharma', 'IT',      65000.00, '1995-04-12'),
+('Priya Singh',  'IT',      48000.00, '1998-08-25'),
+('Amit Patel',   'HR',      35000.00, '1992-11-05'),
+('Sara Khan',    'Finance', 72000.00, '1990-02-18'),
+('John Doe',     'Finance', 55000.00, '1996-09-30');
 
 
 -- ---------------------------------------------------------------------
--- 3. Stored Function Definitions
+-- 1. Procedure with IN Parameter
 -- ---------------------------------------------------------------------
+DROP PROCEDURE IF EXISTS GetEmployeesBySalary;
 
--- A. Tax Calculation Function
-DROP FUNCTION IF EXISTS CalculateTax;
 DELIMITER //
-CREATE FUNCTION CalculateTax(salary DECIMAL(10,2))
-RETURNS DECIMAL(10,2)
+CREATE PROCEDURE GetEmployeesBySalary(IN min_sal DECIMAL(10,2))
+BEGIN
+    SELECT * FROM Employees WHERE salary >= min_sal ORDER BY salary DESC;
+END //
+DELIMITER ;
+
+CALL GetEmployeesBySalary(50000.00);
+
+
+-- ---------------------------------------------------------------------
+-- 2. Procedure with OUT Parameter
+-- ---------------------------------------------------------------------
+DROP PROCEDURE IF EXISTS GetDeptPayroll;
+
+DELIMITER //
+CREATE PROCEDURE GetDeptPayroll(IN p_dept VARCHAR(50), OUT p_total DECIMAL(10,2))
+BEGIN
+    SELECT IFNULL(SUM(salary), 0) INTO p_total 
+    FROM Employees 
+    WHERE dept = p_dept;
+END //
+DELIMITER ;
+
+CALL GetDeptPayroll('IT', @it_payroll);
+SELECT @it_payroll AS IT_Total_Payroll;
+
+
+-- ---------------------------------------------------------------------
+-- 3. Procedure with INOUT Parameter
+-- ---------------------------------------------------------------------
+DROP PROCEDURE IF EXISTS ApplyBonus;
+
+DELIMITER //
+CREATE PROCEDURE ApplyBonus(INOUT p_val DECIMAL(10,2), IN p_bonus DECIMAL(10,2))
+BEGIN
+    SET p_val = p_val + p_bonus;
+END //
+DELIMITER ;
+
+SET @current_bonus = 5000.00;
+CALL ApplyBonus(@current_bonus, 1500.00);
+SELECT @current_bonus AS updated_bonus;
+
+
+-- ---------------------------------------------------------------------
+-- 4. User-Defined Function (UDF): CalculateAge
+-- ---------------------------------------------------------------------
+DROP FUNCTION IF EXISTS CalculateAge;
+
+DELIMITER //
+CREATE FUNCTION CalculateAge(dob DATE)
+RETURNS INT
 DETERMINISTIC
+READS SQL DATA
 BEGIN
-    DECLARE tax DECIMAL(10,2);
-    IF salary > 50000 THEN
-        SET tax = salary * 0.20;
+    RETURN TIMESTAMPDIFF(YEAR, dob, CURDATE());
+END //
+DELIMITER ;
+
+SELECT name, birth_date, CalculateAge(birth_date) AS age FROM Employees;
+
+
+-- ---------------------------------------------------------------------
+-- 5. Procedure with IF-ELSE Control Flow
+-- ---------------------------------------------------------------------
+DROP PROCEDURE IF EXISTS ClassifySalary;
+
+DELIMITER //
+CREATE PROCEDURE ClassifySalary(IN p_emp_id INT, OUT p_tier VARCHAR(20))
+BEGIN
+    DECLARE v_sal DECIMAL(10,2);
+    SELECT salary INTO v_sal FROM Employees WHERE emp_id = p_emp_id;
+    
+    IF v_sal >= 70000 THEN
+        SET p_tier = 'High Earner';
+    ELSEIF v_sal >= 45000 THEN
+        SET p_tier = 'Mid Earner';
     ELSE
-        SET tax = salary * 0.10;
+        SET p_tier = 'Entry Level';
     END IF;
-    RETURN tax;
 END //
 DELIMITER ;
 
--- Test Function
-SELECT name, salary, CalculateTax(salary) AS tax_amount FROM Employees;
+CALL ClassifySalary(1, @emp1_tier);
+SELECT @emp1_tier AS Rahul_Salary_Tier;
 
 
--- B. Annual Salary Function
-DROP FUNCTION IF EXISTS GetAnnualSalary;
+-- ---------------------------------------------------------------------
+-- 6. Procedure with WHILE Loop
+-- ---------------------------------------------------------------------
+DROP PROCEDURE IF EXISTS PopulateLogs;
+
 DELIMITER //
-CREATE FUNCTION GetAnnualSalary(monthly_sal DECIMAL(10,2))
-RETURNS DECIMAL(10,2)
-DETERMINISTIC
+CREATE PROCEDURE PopulateLogs(IN p_count INT)
 BEGIN
-    RETURN monthly_sal * 12;
+    DECLARE i INT DEFAULT 1;
+    WHILE i <= p_count DO
+        INSERT INTO AuditLog (log_message) VALUES (CONCAT('Automated Log Entry #', i));
+        SET i = i + 1;
+    END WHILE;
 END //
 DELIMITER ;
 
--- Test Function
-SELECT name, salary, GetAnnualSalary(salary) AS annual_salary FROM Employees;
+CALL PopulateLogs(3);
+SELECT * FROM AuditLog;
+
+
+-- ---------------------------------------------------------------------
+-- 7. Procedure with Error Exit Handler
+-- ---------------------------------------------------------------------
+DROP PROCEDURE IF EXISTS SafeInsertEmployee;
+
+DELIMITER //
+CREATE PROCEDURE SafeInsertEmployee(
+    IN p_id INT,
+    IN p_name VARCHAR(50),
+    IN p_dept VARCHAR(50),
+    IN p_sal DECIMAL(10,2),
+    OUT p_res VARCHAR(100)
+)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        SET p_res = 'ERROR: Duplicate ID or Invalid Input. Transaction Aborted.';
+    END;
+
+    START TRANSACTION;
+    INSERT INTO Employees (emp_id, name, dept, salary, birth_date)
+    VALUES (p_id, p_name, p_dept, p_sal, '2000-01-01');
+    COMMIT;
+    
+    SET p_res = 'SUCCESS: Employee inserted successfully.';
+END //
+DELIMITER ;
+
+-- Test successful insert:
+CALL SafeInsertEmployee(10, 'Karan Mehta', 'HR', 40000.00, @msg1);
+SELECT @msg1;
+
+-- Test failure insert (Duplicate PK = 10):
+CALL SafeInsertEmployee(10, 'Duplicate User', 'HR', 40000.00, @msg2);
+SELECT @msg2;
